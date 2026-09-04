@@ -131,28 +131,29 @@ h1{
 /* TABLE */
 
 .scroll{
+  display:block;
   width:100%;
+  max-width:100%;
   overflow:hidden;
 }
 
 .mainTable{
-  width:100%;
-  min-width:0;
+  display:table;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
   border-collapse:collapse;
   table-layout:fixed;
 }
 
-
-/*
-  DEFAULT WIDTHS
-
-  Name         25%
-  Qty          12%
-  kg/bag        9%
-  Kilo         15%
-  Price        12%
-  Total        27%
-*/
+<colgroup>
+  <col style="width:25%">
+  <col style="width:12%">
+  <col style="width:9%">
+  <col style="width:15%">
+  <col style="width:12%">
+  <col style="width:27%">
+</colgroup>
 
 .mainTable th,
 .mainTable td{
@@ -365,66 +366,36 @@ h1{
 
 @media(max-width:600px){
 
-  .app{
-    padding:3px;
+  .scroll{
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
   }
 
-  h1{
-    font-size:18px;
+  .mainTable{
+    width:100% !important;
+    min-width:0 !important;
+    max-width:100% !important;
+    table-layout:fixed;
   }
 
-  .save{
-    display:none;
+  .mainTable th,
+  .mainTable td{
+    min-width:0;
+    max-width:100%;
   }
 
   .mainTable th{
-    font-size:9px;
-    padding:7px 1px;
-  }
-
-  .mainTable td{
-    height:43px;
-    padding:1px;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    word-break:break-word;
   }
 
   .mainTable input{
-    height:39px;
-    padding:3px 1px;
-    font-size:12px;
+    width:100%;
+    min-width:0;
+    max-width:100%;
   }
-
-  .mainTable .calc{
-    font-size:11px;
-  }
-
-  .summary{
-    grid-template-columns:1fr 1fr;
-    gap:5px;
-    padding:6px;
-  }
-
-  .box{
-    padding:6px 7px;
-  }
-
-  .box span{
-    font-size:10px;
-  }
-
-  .box strong{
-    font-size:15px;
-  }
-
-  .actions{
-    gap:3px;
-    padding:6px;
-  }
-
-  .actions button{
-    padding:10px 1px;
-    font-size:9px;
-  }
-
 }
 
 
