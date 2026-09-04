@@ -438,37 +438,36 @@ button{
     <!-- =====================
          MAIN CALCULATOR
     ====================== -->
+<div class="scroll">
 
-    <div class="scroll">
+  <table class="mainTable"
+         style="width:100%;min-width:0;table-layout:fixed;">
 
-      <table class="mainTable">
+    <colgroup>
+      <col style="width:25%">
+      <col style="width:12%">
+      <col style="width:9%">
+      <col style="width:15%">
+      <col style="width:12%">
+      <col style="width:27%">
+    </colgroup>
 
-        <!-- COLUMN WIDTHS -->
-        <colgroup>
-          <col style="width:25%">
-          <col style="width:12%">
-          <col style="width:9%">
-          <col style="width:15%">
-          <col style="width:12%">
-          <col style="width:27%">
-        </colgroup>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Qty</th>
+        <th>kg/bag</th>
+        <th>Kilo</th>
+        <th>Price</th>
+        <th>Total Amount</th>
+      </tr>
+    </thead>
 
-        <thead>
+    <tbody id="rows"></tbody>
 
-          <tr>
-            <th>Name</th>
-            <th>Qty</th>
-            <th>kg/bag</th>
-            <th>Kilo</th>
-            <th>Price</th>
-            <th>Total Amount</th>
-          </tr>
+  </table>
 
-        </thead>
-
-        <tbody id="rows"></tbody>
-
-      </table>
+</div>
 
     </div>
 
