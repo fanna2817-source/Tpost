@@ -84,7 +84,7 @@ h1{
 
 
 /* =========================
-   CLIENT TABS
+   CLIENT BAR
 ========================= */
 
 .clientBar{
@@ -104,31 +104,90 @@ h1{
   display:none;
 }
 
+
+/* =========================
+   CLIENT TAB
+========================= */
+
 .clientTab{
+  display:flex;
+  align-items:center;
+  gap:2px;
+
   flex:0 0 auto;
+
   border:0;
   border-radius:9px 9px 0 0;
-  padding:8px 12px;
+
+  padding:0;
+
   background:#dfe8e9;
   color:#172024;
-  font-size:12px;
+
+  font-size:11px;
   font-weight:700;
+
   white-space:nowrap;
+  overflow:hidden;
 }
 
 .clientTab.active{
   background:#08dada;
 }
 
+
+/* CLIENT NAME */
+
+.clientName{
+  border:0;
+  background:transparent;
+  color:inherit;
+
+  padding:8px 5px 8px 10px;
+
+  font-size:11px;
+  font-weight:700;
+
+  white-space:nowrap;
+}
+
+
+/* DELETE X */
+
+.deleteClient{
+  border:0;
+  background:transparent;
+  color:#555;
+
+  font-size:18px;
+  font-weight:700;
+
+  line-height:1;
+
+  padding:5px 8px 5px 2px;
+}
+
+.deleteClient:active{
+  transform:scale(.9);
+}
+
+
+/* NEW CLIENT */
+
 .newClient{
   flex:0 0 auto;
+
   border:0;
   border-radius:9px;
+
   padding:8px 11px;
+
   background:#172024;
   color:#fff;
-  font-size:12px;
+
+  font-size:11px;
   font-weight:700;
+
   white-space:nowrap;
 }
 
@@ -140,9 +199,13 @@ h1{
 .card{
   width:100%;
   max-width:100%;
+
   background:#fff;
+
   border-radius:0 14px 14px 14px;
+
   box-shadow:0 2px 10px #0001;
+
   overflow:hidden;
 }
 
@@ -161,6 +224,7 @@ h1{
   width:100%;
   max-width:100%;
   min-width:0;
+
   border-collapse:collapse;
   table-layout:fixed;
 }
@@ -218,12 +282,18 @@ TOTAL = 100%
 
 .mainTable th{
   background:#08dada;
+
   padding:8px 2px;
+
   text-align:center;
+
   font-size:12px;
   line-height:1.05;
+
   white-space:normal;
+
   overflow-wrap:anywhere;
+
   overflow:hidden;
 }
 
@@ -234,8 +304,11 @@ TOTAL = 100%
 
 .mainTable td{
   border:1px solid #d9dfe2;
+
   height:43px;
+
   padding:1px;
+
   overflow:hidden;
 }
 
@@ -246,15 +319,22 @@ TOTAL = 100%
 
 .mainTable input{
   display:block;
+
   width:100%;
   max-width:100%;
   min-width:0;
+
   height:39px;
+
   border:0;
   outline:0;
+
   background:transparent;
+
   padding:3px 2px;
+
   font-size:15px;
+
   color:#172024;
 }
 
@@ -269,12 +349,19 @@ TOTAL = 100%
 
 .mainTable .calc{
   text-align:center;
+
   padding:3px 1px;
+
   font-size:13px;
+
   font-variant-numeric:tabular-nums;
+
   background:#f8fafb;
+
   white-space:nowrap;
+
   overflow:hidden;
+
   text-overflow:clip;
 }
 
@@ -285,15 +372,21 @@ TOTAL = 100%
 
 .summary{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:6px;
+
   padding:7px;
 }
 
 .box{
   background:#08dada;
+
   border-radius:8px;
+
   padding:7px 9px;
+
   min-width:0;
 }
 
@@ -303,10 +396,15 @@ TOTAL = 100%
 
 .box strong{
   display:block;
+
   text-align:right;
+
   font-size:17px;
+
   margin-top:3px;
+
   overflow:hidden;
+
   text-overflow:ellipsis;
 }
 
@@ -318,7 +416,9 @@ TOTAL = 100%
 .amount{
   width:100%;
   max-width:100%;
+
   padding:0 7px 7px;
+
   overflow:hidden;
 }
 
@@ -326,14 +426,19 @@ TOTAL = 100%
   width:100%;
   max-width:100%;
   min-width:0;
+
   border-collapse:collapse;
+
   table-layout:fixed;
 }
 
 .amount th{
   background:#08dada;
+
   padding:8px 4px;
+
   text-align:left;
+
   font-size:12px;
 }
 
@@ -342,17 +447,15 @@ TOTAL = 100%
 }
 
 
-/* =========================
-   AMOUNT COLUMNS
-========================= */
+/* NOTES = 35%
+   AMOUNT = 65%
+*/
 
-/* Notes / editable column */
 .amount th:first-child,
 .amount td:first-child{
   width:35%;
 }
 
-/* Numeric amount column */
 .amount th:last-child,
 .amount td:last-child{
   width:65%;
@@ -365,43 +468,55 @@ TOTAL = 100%
 
 .amount td{
   height:40px;
+
   border:1px solid #d9dfe2;
+
   padding:2px 4px;
 }
 
 
-/* =========================
-   EDITABLE NOTES
-========================= */
+/* EDITABLE NOTES */
 
 .amount .note{
   display:block;
+
   width:100%;
   max-width:100%;
+
   height:34px;
+
   border:0;
   outline:0;
+
   background:transparent;
+
   font-size:14px;
+
   padding:3px;
+
   color:#172024;
 }
 
 
-/* =========================
-   NUMERIC AMOUNT
-========================= */
+/* NUMERIC AMOUNT */
 
 .amount .deduct{
   display:block;
+
   width:100%;
   max-width:100%;
+
   height:34px;
+
   text-align:right;
+
   border:0;
   outline:0;
+
   background:transparent;
+
   font-size:15px;
+
   padding:3px;
 }
 
@@ -416,24 +531,37 @@ TOTAL = 100%
 
 .actions{
   display:flex;
+
   flex-wrap:nowrap;
+
   gap:4px;
+
   width:100%;
   max-width:100%;
+
   padding:7px;
+
   overflow:hidden;
 }
 
 .actions button{
   flex:1 1 0;
+
   width:20%;
   min-width:0;
+
   border:0;
+
   border-radius:9px;
+
   padding:10px 2px;
+
   font-size:11px;
+
   font-weight:700;
+
   white-space:nowrap;
+
   overflow:hidden;
 }
 
@@ -483,9 +611,22 @@ TOTAL = 100%
 
   /* CLIENT TABS */
 
-  .clientTab,
+  .clientTab{
+    font-size:10px;
+  }
+
+  .clientName{
+    font-size:10px;
+    padding:8px 4px 8px 8px;
+  }
+
+  .deleteClient{
+    font-size:17px;
+    padding:5px 6px 5px 1px;
+  }
+
   .newClient{
-    font-size:11px;
+    font-size:10px;
     padding:8px 9px;
   }
 
@@ -502,6 +643,7 @@ TOTAL = 100%
     width:100%;
     max-width:100%;
     min-width:0;
+
     table-layout:fixed;
   }
 
@@ -510,8 +652,14 @@ TOTAL = 100%
 
   .mainTable th{
     font-size:9px;
+
     line-height:1.05;
+
     padding:7px 1px;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
   }
 
 
@@ -519,6 +667,7 @@ TOTAL = 100%
 
   .mainTable td{
     height:43px;
+
     padding:1px;
   }
 
@@ -529,8 +678,11 @@ TOTAL = 100%
     width:100%;
     max-width:100%;
     min-width:0;
+
     height:39px;
+
     padding:3px 1px;
+
     font-size:12px;
   }
 
@@ -540,6 +692,7 @@ TOTAL = 100%
 
   .mainTable .calc{
     font-size:11px;
+
     padding:3px 1px;
   }
 
@@ -548,7 +701,9 @@ TOTAL = 100%
 
   .summary{
     grid-template-columns:1fr 1fr;
+
     gap:5px;
+
     padding:6px;
   }
 
@@ -584,18 +739,27 @@ TOTAL = 100%
 
   .actions{
     display:flex;
+
     flex-wrap:nowrap;
+
     gap:3px;
+
     padding:6px;
+
     overflow:hidden;
   }
 
   .actions button{
     flex:1 1 0;
+
     width:20%;
+
     min-width:0;
+
     padding:10px 1px;
+
     font-size:9px;
+
     border-radius:8px;
   }
 
@@ -880,10 +1044,10 @@ const saveState =
 ========================= */
 
 const CLIENT_KEY =
-  'TPOST_CLIENTS_V6';
+  'TPOST_CLIENTS_V7';
 
 const SNAPSHOT_KEY =
-  'TPOST_SNAPSHOTS_V6';
+  'TPOST_SNAPSHOTS_V7';
 
 
 let clients = {};
@@ -984,7 +1148,8 @@ function addRow(data=blank()){
   const name =
     makeInput(
       '',
-      data.name
+      data.name,
+      'text'
     );
 
 
@@ -1040,6 +1205,7 @@ function addRow(data=blank()){
 
     let td;
 
+
     if(i === 3 || i === 5){
 
       td = x;
@@ -1052,6 +1218,7 @@ function addRow(data=blank()){
       td.appendChild(x);
 
     }
+
 
     tr.appendChild(td);
 
@@ -1082,7 +1249,7 @@ function addRow(data=blank()){
 
 
 /* =========================
-   ADD DEDUCTION / NOTE ROW
+   ADD NOTES / AMOUNT ROW
 ========================= */
 
 function addDeduction(data={}){
@@ -1091,10 +1258,11 @@ function addDeduction(data={}){
     document.createElement('tr');
 
 
-  /* FIRST COLUMN = EDITABLE NOTE */
+  /* NOTES */
 
   const noteCell =
     document.createElement('td');
+
 
   const note =
     makeInput(
@@ -1103,16 +1271,15 @@ function addDeduction(data={}){
       'text'
     );
 
-  note.placeholder =
-    '';
 
   noteCell.appendChild(note);
 
 
-  /* SECOND COLUMN = NUMERIC AMOUNT */
+  /* AMOUNT */
 
   const amountCell =
     document.createElement('td');
+
 
   const amount =
     makeInput(
@@ -1121,12 +1288,16 @@ function addDeduction(data={}){
       'number'
     );
 
+
   amountCell.appendChild(amount);
 
 
   tr.appendChild(noteCell);
+
   tr.appendChild(amountCell);
 
+
+  /* AUTO SAVE NOTES */
 
   note.addEventListener(
     'input',
@@ -1135,6 +1306,8 @@ function addDeduction(data={}){
     }
   );
 
+
+  /* CALCULATE AMOUNT */
 
   amount.addEventListener(
     'input',
@@ -1282,57 +1455,100 @@ function loadClients(){
 
 
 /* =========================
-   RENDER TABS
+   RENDER CLIENT TABS
 ========================= */
 
 function renderTabs(){
 
-  clientBar.innerHTML =
-    '';
+  clientBar.innerHTML = '';
 
 
   Object.keys(clients)
   .forEach(name=>{
 
-    const button =
-      document.createElement('button');
+    const tab =
+      document.createElement('div');
 
 
-    button.className =
+    tab.className =
       'clientTab';
 
 
     if(name === currentClient){
 
-      button.classList.add(
+      tab.classList.add(
         'active'
       );
 
     }
 
 
-    button.textContent =
+    /* CLIENT NAME BUTTON */
+
+    const nameBtn =
+      document.createElement('button');
+
+
+    nameBtn.className =
+      'clientName';
+
+
+    nameBtn.textContent =
       name;
 
 
-    button.onclick =
+    nameBtn.onclick =
       ()=>{
         switchClient(name);
       };
 
 
-    button.ondblclick =
-      ()=>{
+    /* DELETE X BUTTON */
+
+    const deleteBtn =
+      document.createElement('button');
+
+
+    deleteBtn.className =
+      'deleteClient';
+
+
+    deleteBtn.textContent =
+      '×';
+
+
+    deleteBtn.title =
+      'Remove client';
+
+
+    deleteBtn.onclick =
+      (event)=>{
+
+        event.stopPropagation();
+
         deleteClient(name);
+
       };
 
 
+    tab.appendChild(
+      nameBtn
+    );
+
+
+    tab.appendChild(
+      deleteBtn
+    );
+
+
     clientBar.appendChild(
-      button
+      tab
     );
 
   });
 
+
+  /* NEW CLIENT */
 
   const newButton =
     document.createElement('button');
@@ -1340,6 +1556,7 @@ function renderTabs(){
 
   newButton.className =
     'newClient';
+
 
   newButton.textContent =
     '＋ New';
@@ -1371,18 +1588,20 @@ function loadClient(){
 
   const data =
     clients[currentClient] || {
+
       rows:[],
       ded:[]
+
     };
 
 
-  /* LOAD SAVED MAIN ROWS */
+  /* LOAD SAVED ROWS */
 
   (data.rows || [])
   .forEach(addRow);
 
 
-  /* MINIMUM 10 ROWS */
+  /* ALWAYS START WITH 10 ROWS */
 
   while(
     rowsEl.children.length < 10
@@ -1393,13 +1612,13 @@ function loadClient(){
   }
 
 
-  /* LOAD NOTES + AMOUNTS */
+  /* LOAD NOTES AND AMOUNTS */
 
   (data.ded || [])
   .forEach(addDeduction);
 
 
-  /* MINIMUM 13 ROWS */
+  /* MINIMUM 13 AMOUNT ROWS */
 
   while(
     dedEl.children.length < 13
@@ -1434,7 +1653,7 @@ function switchClient(name){
 
 
 /* =========================
-   NEW CLIENT
+   CREATE NEW CLIENT
 ========================= */
 
 function createClient(){
@@ -1514,11 +1733,13 @@ function createClient(){
 
 function deleteClient(name){
 
-  if(!confirm(
-    'Delete "' +
-    name +
-    '" and all its data?'
-  )){
+  if(
+    !confirm(
+      'Remove "' +
+      name +
+      '" and all of its saved data?'
+    )
+  ){
 
     return;
 
@@ -1531,6 +1752,8 @@ function deleteClient(name){
   const names =
     Object.keys(clients);
 
+
+  /* ALWAYS KEEP ONE CLIENT */
 
   if(names.length === 0){
 
@@ -1564,6 +1787,10 @@ function deleteClient(name){
   loadClient();
 
   renderTabs();
+
+
+  saveState.textContent =
+    'Saved';
 
 }
 
@@ -1633,6 +1860,8 @@ function calculate(){
   });
 
 
+  /* DEDUCTIONS */
+
   let deductions = 0;
 
 
@@ -1645,6 +1874,8 @@ function calculate(){
 
   });
 
+
+  /* TOTALS */
 
   document.querySelector(
     '#sumKilo'
@@ -1670,7 +1901,7 @@ function calculate(){
 
 
 /* =========================
-   ADD BUTTON
+   ADD ROW BUTTON
 ========================= */
 
 document
@@ -1687,7 +1918,7 @@ document
 
 
 /* =========================
-   REMOVE BUTTON
+   REMOVE ROW BUTTON
 ========================= */
 
 document
@@ -1811,7 +2042,7 @@ document
 .onclick = ()=>{
 
   alert(
-    'PNG saving can be added next.'
+    'PNG saving will be added separately.'
   );
 
 };
@@ -1825,11 +2056,13 @@ document
 .querySelector('#clear')
 .onclick = ()=>{
 
-  if(!confirm(
-    'Clear all entries for "' +
-    currentClient +
-    '"?'
-  )){
+  if(
+    !confirm(
+      'Clear all entries for "' +
+      currentClient +
+      '"?'
+    )
+  ){
 
     return;
 
@@ -1843,7 +2076,7 @@ document
     '';
 
 
-  /* EXACTLY 10 MAIN ROWS */
+  /* RESET TO 10 ROWS */
 
   for(
     let i=0;
@@ -1856,7 +2089,7 @@ document
   }
 
 
-  /* 13 NOTES/AMOUNT ROWS */
+  /* RESET NOTES / AMOUNTS */
 
   for(
     let i=0;
@@ -1877,7 +2110,7 @@ document
 
 
 /* =========================
-   START
+   START APP
 ========================= */
 
 loadClients();
