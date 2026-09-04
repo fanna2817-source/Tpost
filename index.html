@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
 
 <meta charset="utf-8">
@@ -21,7 +22,6 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 
 <title>T-Post</title>
-
 
 <style>
 
@@ -45,11 +45,12 @@ body{
 body{
   background:#f4f7f8;
   color:#172024;
-  font-family:-apple-system,
-              BlinkMacSystemFont,
-              "Segoe UI",
-              Arial,
-              sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
 .app{
@@ -94,6 +95,7 @@ h1{
   gap:4px;
 
   width:100%;
+  max-width:100%;
 
   overflow-x:auto;
   overflow-y:hidden;
@@ -166,46 +168,64 @@ h1{
 
 
 /* =========================
-   TABLE
+   MAIN TABLE WRAPPER
 ========================= */
 
 .scroll{
-  display:block;
-
   width:100%;
   max-width:100%;
-
   overflow:hidden;
 }
 
+
+/* =========================
+   MAIN TABLE
+========================= */
+
 .mainTable{
-  width:100% !important;
-  max-width:100% !important;
-  min-width:0 !important;
+
+  width:100%;
+  max-width:100%;
+  min-width:0;
 
   border-collapse:collapse;
-
   table-layout:fixed;
+
+  --c1:25%;
+  --c2:12%;
+  --c3:9%;
+  --c4:15%;
+  --c5:12%;
+  --c6:27%;
 }
 
 
-/*
-   DEFAULT WIDTHS
+/* =========================
+   COLUMN WIDTHS
+========================= */
 
-   Name          25%
-   Qty           12%
-   kg/bag         9%
-   Kilo          15%
-   Price         12%
-   Total Amount  27%
+.mainTable col:nth-child(1){
+  width:var(--c1);
+}
 
-   TOTAL = 100%
-*/
+.mainTable col:nth-child(2){
+  width:var(--c2);
+}
 
-.mainTable th,
-.mainTable td{
-  min-width:0;
-  max-width:100%;
+.mainTable col:nth-child(3){
+  width:var(--c3);
+}
+
+.mainTable col:nth-child(4){
+  width:var(--c4);
+}
+
+.mainTable col:nth-child(5){
+  width:var(--c5);
+}
+
+.mainTable col:nth-child(6){
+  width:var(--c6);
 }
 
 
@@ -214,11 +234,12 @@ h1{
 ========================= */
 
 .mainTable th{
+
   position:relative;
 
   background:#08dada;
 
-  padding:8px 2px;
+  padding:8px 3px;
 
   text-align:center;
 
@@ -228,9 +249,52 @@ h1{
   white-space:normal;
 
   overflow-wrap:anywhere;
-  word-break:break-word;
 
   overflow:hidden;
+}
+
+
+/* =========================
+   DRAGGABLE DIVIDERS
+========================= */
+
+.resizeHandle{
+
+  position:absolute;
+
+  top:0;
+  right:-7px;
+
+  width:14px;
+  height:100%;
+
+  z-index:20;
+
+  cursor:col-resize;
+
+  touch-action:none;
+}
+
+.resizeHandle::after{
+
+  content:"";
+
+  position:absolute;
+
+  top:15%;
+  bottom:15%;
+  left:6px;
+
+  width:3px;
+
+  border-radius:3px;
+
+  background:#ffffff99;
+}
+
+.resizeHandle:active::after{
+
+  background:#172024;
 }
 
 
@@ -239,6 +303,7 @@ h1{
 ========================= */
 
 .mainTable td{
+
   border:1px solid #d9dfe2;
 
   height:43px;
@@ -254,6 +319,7 @@ h1{
 ========================= */
 
 .mainTable input{
+
   display:block;
 
   width:100%;
@@ -284,6 +350,7 @@ h1{
 ========================= */
 
 .mainTable .calc{
+
   text-align:center;
 
   padding:3px 1px;
@@ -297,73 +364,8 @@ h1{
   white-space:nowrap;
 
   overflow:hidden;
-}
 
-
-/* =========================
-   DRAGGABLE DIVIDERS
-========================= */
-
-/*
-   Each divider has a large invisible
-   touch area, making it easier to
-   drag on an iPhone.
-*/
-
-.resizeHandle{
-  position:absolute;
-
-  top:0;
-  right:-9px;
-
-  width:18px;
-  height:100%;
-
-  z-index:100;
-
-  cursor:col-resize;
-
-  touch-action:none;
-}
-
-.resizeHandle::before{
-  content:"";
-
-  position:absolute;
-
-  top:0;
-  right:7px;
-
-  width:3px;
-  height:100%;
-
-  background:#17202455;
-
-  border-radius:3px;
-}
-
-.resizeHandle::after{
-  content:"";
-
-  position:absolute;
-
-  top:35%;
-  right:3px;
-
-  width:11px;
-  height:30%;
-
-  border-left:2px solid #17202488;
-  border-right:2px solid #17202488;
-
-  border-radius:2px;
-}
-
-body.resizing{
-  user-select:none;
-  -webkit-user-select:none;
-
-  cursor:col-resize;
+  text-overflow:clip;
 }
 
 
@@ -372,6 +374,7 @@ body.resizing{
 ========================= */
 
 .summary{
+
   display:grid;
 
   grid-template-columns:1fr 1fr;
@@ -382,6 +385,7 @@ body.resizing{
 }
 
 .box{
+
   background:#08dada;
 
   border-radius:8px;
@@ -396,6 +400,7 @@ body.resizing{
 }
 
 .box strong{
+
   display:block;
 
   text-align:right;
@@ -411,10 +416,11 @@ body.resizing{
 
 
 /* =========================
-   DEDUCTIONS
+   AMOUNT SECTION
 ========================= */
 
 .amount{
+
   width:100%;
   max-width:100%;
 
@@ -424,6 +430,7 @@ body.resizing{
 }
 
 .amount table{
+
   width:100%;
   max-width:100%;
   min-width:0;
@@ -433,7 +440,23 @@ body.resizing{
   table-layout:fixed;
 }
 
+
+/* First Amount column = notes */
+
+.amount th:first-child,
+.amount td:first-child{
+  width:50%;
+}
+
+/* Second Amount column = amount */
+
+.amount th:last-child,
+.amount td:last-child{
+  width:50%;
+}
+
 .amount th{
+
   background:#08dada;
 
   padding:8px 4px;
@@ -448,6 +471,7 @@ body.resizing{
 }
 
 .amount td{
+
   height:40px;
 
   border:1px solid #d9dfe2;
@@ -455,11 +479,47 @@ body.resizing{
   padding:2px 4px;
 }
 
-.amount .deduct{
+
+/* =========================
+   AMOUNT NOTE INPUT
+========================= */
+
+.amount .noteInput{
+
   display:block;
 
   width:100%;
   max-width:100%;
+
+  height:35px;
+
+  border:0;
+  outline:0;
+
+  background:transparent;
+
+  font-size:15px;
+
+  padding:4px;
+
+  color:#172024;
+
+  text-align:left;
+}
+
+
+/* =========================
+   AMOUNT NUMBER INPUT
+========================= */
+
+.amount .deduct{
+
+  display:block;
+
+  width:100%;
+  max-width:100%;
+
+  height:35px;
 
   text-align:right;
 
@@ -469,10 +529,21 @@ body.resizing{
   background:transparent;
 
   font-size:15px;
+
+  padding:4px;
 }
+
+
+/* =========================
+   AMOUNT TOTAL
+========================= */
 
 .amountTotal{
   font-weight:700;
+}
+
+.amount .calc{
+  text-align:right;
 }
 
 
@@ -481,6 +552,7 @@ body.resizing{
 ========================= */
 
 .actions{
+
   display:flex;
 
   flex-wrap:nowrap;
@@ -496,8 +568,10 @@ body.resizing{
 }
 
 .actions button{
+
   flex:1 1 0;
 
+  width:20%;
   min-width:0;
 
   border:0;
@@ -513,6 +587,8 @@ body.resizing{
   white-space:nowrap;
 
   overflow:hidden;
+
+  text-overflow:clip;
 }
 
 .add{
@@ -537,7 +613,7 @@ body.resizing{
 
 
 /* =========================
-   MOBILE
+   IPHONE
 ========================= */
 
 @media(max-width:600px){
@@ -564,23 +640,25 @@ body.resizing{
   .clientTab,
   .newClient{
     font-size:11px;
-
     padding:8px 9px;
   }
 
 
-  /* TABLE */
+  /* MAIN TABLE */
 
   .scroll{
+
     width:100%;
     max-width:100%;
+
     overflow:hidden;
   }
 
   .mainTable{
-    width:100% !important;
-    max-width:100% !important;
-    min-width:0 !important;
+
+    width:100%;
+    max-width:100%;
+    min-width:0;
 
     table-layout:fixed;
   }
@@ -589,6 +667,7 @@ body.resizing{
   /* HEADER */
 
   .mainTable th{
+
     font-size:9px;
 
     line-height:1.05;
@@ -598,13 +677,13 @@ body.resizing{
     white-space:normal;
 
     overflow-wrap:anywhere;
-    word-break:break-word;
   }
 
 
   /* CELLS */
 
   .mainTable td{
+
     height:43px;
 
     padding:1px;
@@ -614,6 +693,7 @@ body.resizing{
   /* INPUT */
 
   .mainTable input{
+
     width:100%;
     max-width:100%;
     min-width:0;
@@ -630,6 +710,7 @@ body.resizing{
   }
 
   .mainTable .calc{
+
     font-size:11px;
 
     padding:3px 1px;
@@ -639,6 +720,7 @@ body.resizing{
   /* SUMMARY */
 
   .summary{
+
     grid-template-columns:1fr 1fr;
 
     gap:5px;
@@ -665,16 +747,38 @@ body.resizing{
     padding:0 6px 6px;
   }
 
+  .amount .noteInput{
+    font-size:13px;
+  }
+
+  .amount .deduct{
+    font-size:13px;
+  }
+
 
   /* BUTTONS */
 
   .actions{
+
+    display:flex;
+
+    flex-wrap:nowrap;
+
     gap:3px;
 
     padding:6px;
+
+    overflow:hidden;
   }
 
   .actions button{
+
+    flex:1 1 0;
+
+    width:20%;
+
+    min-width:0;
+
     padding:10px 1px;
 
     font-size:9px;
@@ -707,11 +811,17 @@ body.resizing{
     font-size:10px;
   }
 
+  .amount .noteInput,
+  .amount .deduct{
+    font-size:12px;
+  }
+
   .actions{
     gap:2px;
   }
 
   .actions button{
+
     padding:9px 1px;
 
     font-size:8px;
@@ -729,7 +839,9 @@ body.resizing{
 <div class="app">
 
 
-  <!-- TOP -->
+  <!-- =========================
+       TOP
+  ========================== -->
 
   <div class="top">
 
@@ -744,7 +856,9 @@ body.resizing{
   </div>
 
 
-  <!-- CLIENT TABS -->
+  <!-- =========================
+       CLIENT TABS
+  ========================== -->
 
   <div
     class="clientBar"
@@ -752,18 +866,20 @@ body.resizing{
   </div>
 
 
-  <!-- CARD -->
+  <!-- =========================
+       CARD
+  ========================== -->
 
   <div class="card">
 
 
-    <!-- MAIN TABLE -->
+    <!-- =========================
+         MAIN TABLE
+    ========================== -->
 
     <div class="scroll">
 
-      <table
-        class="mainTable"
-        id="mainTable">
+      <table class="mainTable">
 
         <colgroup>
 
@@ -781,70 +897,38 @@ body.resizing{
 
           <tr>
 
-            <th data-col="0">
-
+            <th>
               Name
-
-              <span
-                class="resizeHandle"
-                data-col="0">
-              </span>
-
+              <span class="resizeHandle"
+                    data-col="0"></span>
             </th>
 
-
-            <th data-col="1">
-
+            <th>
               Qty
-
-              <span
-                class="resizeHandle"
-                data-col="1">
-              </span>
-
+              <span class="resizeHandle"
+                    data-col="1"></span>
             </th>
 
-
-            <th data-col="2">
-
+            <th>
               kg/bag
-
-              <span
-                class="resizeHandle"
-                data-col="2">
-              </span>
-
+              <span class="resizeHandle"
+                    data-col="2"></span>
             </th>
 
-
-            <th data-col="3">
-
+            <th>
               Kilo
-
-              <span
-                class="resizeHandle"
-                data-col="3">
-              </span>
-
+              <span class="resizeHandle"
+                    data-col="3"></span>
             </th>
 
-
-            <th data-col="4">
-
+            <th>
               Price
-
-              <span
-                class="resizeHandle"
-                data-col="4">
-              </span>
-
+              <span class="resizeHandle"
+                    data-col="4"></span>
             </th>
 
-
-            <th data-col="5">
-
+            <th>
               Total Amount
-
             </th>
 
           </tr>
@@ -860,7 +944,9 @@ body.resizing{
     </div>
 
 
-    <!-- SUMMARY -->
+    <!-- =========================
+         SUMMARY
+    ========================== -->
 
     <div class="summary">
 
@@ -892,7 +978,9 @@ body.resizing{
     </div>
 
 
-    <!-- DEDUCTIONS -->
+    <!-- =========================
+         AMOUNT / DEDUCTIONS
+    ========================== -->
 
     <div class="amount">
 
@@ -903,7 +991,7 @@ body.resizing{
           <tr>
 
             <th>
-              Amount
+              Notes
             </th>
 
             <th>
@@ -942,7 +1030,9 @@ body.resizing{
     </div>
 
 
-    <!-- BUTTONS -->
+    <!-- =========================
+         BUTTONS
+    ========================== -->
 
     <div class="actions">
 
@@ -1007,10 +1097,7 @@ const saveState =
   document.querySelector('#saveState');
 
 const mainTable =
-  document.querySelector('#mainTable');
-
-const colElements =
-  mainTable.querySelectorAll('col');
+  document.querySelector('.mainTable');
 
 
 /* =========================
@@ -1020,8 +1107,11 @@ const colElements =
 const CLIENT_KEY =
   'TPOST_CLIENTS_V6';
 
+const SNAPSHOT_KEY =
+  'TPOST_SNAPSHOTS_V6';
+
 const WIDTH_KEY =
-  'TPOST_WIDTHS_V1';
+  'TPOST_WIDTHS_V6';
 
 
 let clients = {};
@@ -1034,116 +1124,13 @@ let currentClient = null;
 ========================= */
 
 let columnWidths = [
-
-  25,  // Name
-  12,  // Qty
-  9,   // kg/bag
-  15,  // Kilo
-  12,  // Price
-  27   // Total Amount
-
+  25,
+  12,
+  9,
+  15,
+  12,
+  27
 ];
-
-
-/* =========================
-   LOAD COLUMN WIDTHS
-========================= */
-
-function loadWidths(){
-
-  try{
-
-    const saved =
-      JSON.parse(
-        localStorage.getItem(
-          WIDTH_KEY
-        )
-      );
-
-    if(
-      Array.isArray(saved) &&
-      saved.length === 6
-    ){
-
-      const total =
-        saved.reduce(
-          (a,b)=>a+Number(b),
-          0
-        );
-
-      if(
-        Math.abs(total - 100) < 0.5
-      ){
-
-        columnWidths =
-          saved.map(Number);
-
-      }
-
-    }
-
-  }catch(error){}
-
-}
-
-
-/* =========================
-   APPLY COLUMN WIDTHS
-========================= */
-
-function applyWidths(){
-
-  columnWidths.forEach(
-    (width,index)=>{
-
-      colElements[index]
-        .style.width =
-        width + '%';
-
-    }
-  );
-
-}
-
-
-/* =========================
-   SAVE WIDTHS
-========================= */
-
-function saveWidths(){
-
-  localStorage.setItem(
-    WIDTH_KEY,
-    JSON.stringify(
-      columnWidths
-    )
-  );
-
-}
-
-
-/* =========================
-   RESET WIDTHS
-========================= */
-
-function resetWidths(){
-
-  columnWidths = [
-
-    25,
-    12,
-    9,
-    15,
-    12,
-    27
-
-  ];
-
-  applyWidths();
-
-  saveWidths();
-
-}
 
 
 /* =========================
@@ -1153,12 +1140,10 @@ function resetWidths(){
 function blank(){
 
   return {
-
     name:'',
     qty:'',
     kgBag:'',
     price:''
-
   };
 
 }
@@ -1182,20 +1167,17 @@ function num(v){
 function fmt(v){
 
   if(Number.isInteger(v)){
-
     return String(v);
-
   }
 
   return v
     .toFixed(2)
     .replace(/\.?0+$/,'');
-
 }
 
 
 /* =========================
-   INPUT
+   INPUT CREATOR
 ========================= */
 
 function makeInput(
@@ -1232,7 +1214,242 @@ function makeInput(
 
 
 /* =========================
-   ADD ROW
+   APPLY COLUMN WIDTHS
+========================= */
+
+function applyWidths(){
+
+  mainTable.style.setProperty(
+    '--c1',
+    columnWidths[0] + '%'
+  );
+
+  mainTable.style.setProperty(
+    '--c2',
+    columnWidths[1] + '%'
+  );
+
+  mainTable.style.setProperty(
+    '--c3',
+    columnWidths[2] + '%'
+  );
+
+  mainTable.style.setProperty(
+    '--c4',
+    columnWidths[3] + '%'
+  );
+
+  mainTable.style.setProperty(
+    '--c5',
+    columnWidths[4] + '%'
+  );
+
+  mainTable.style.setProperty(
+    '--c6',
+    columnWidths[5] + '%'
+  );
+
+}
+
+
+/* =========================
+   SAVE COLUMN WIDTHS
+========================= */
+
+function saveWidths(){
+
+  localStorage.setItem(
+    WIDTH_KEY,
+    JSON.stringify(columnWidths)
+  );
+
+}
+
+
+/* =========================
+   LOAD COLUMN WIDTHS
+========================= */
+
+function loadWidths(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          WIDTH_KEY
+        )
+      );
+
+    if(
+      Array.isArray(saved) &&
+      saved.length === 6
+    ){
+
+      columnWidths =
+        saved.map(Number);
+
+    }
+
+  }catch(error){}
+
+  applyWidths();
+
+}
+
+
+/* =========================
+   DRAGGABLE DIVIDERS
+========================= */
+
+function setupDividers(){
+
+  const handles =
+    document.querySelectorAll(
+      '.resizeHandle'
+    );
+
+
+  handles.forEach(handle=>{
+
+    handle.addEventListener(
+      'pointerdown',
+      startResize
+    );
+
+  });
+
+}
+
+
+/* =========================
+   START RESIZE
+========================= */
+
+function startResize(event){
+
+  event.preventDefault();
+
+  const index =
+    Number(
+      event.currentTarget.dataset.col
+    );
+
+
+  if(index >= 5){
+    return;
+  }
+
+
+  const startX =
+    event.clientX;
+
+  const tableWidth =
+    mainTable.getBoundingClientRect().width;
+
+
+  const startLeft =
+    columnWidths[index];
+
+  const startRight =
+    columnWidths[index + 1];
+
+
+  function moveResize(e){
+
+    const difference =
+      ((e.clientX - startX) /
+      tableWidth) * 100;
+
+
+    let newLeft =
+      startLeft + difference;
+
+    let newRight =
+      startRight - difference;
+
+
+    /*
+       Minimum width prevents
+       a column from disappearing.
+    */
+
+    const minLeft =
+      index === 0 ? 12 : 6;
+
+    const minRight =
+      index + 1 === 5 ? 15 : 6;
+
+
+    if(newLeft < minLeft){
+
+      newLeft = minLeft;
+
+      newRight =
+        startLeft +
+        startRight -
+        newLeft;
+
+    }
+
+
+    if(newRight < minRight){
+
+      newRight = minRight;
+
+      newLeft =
+        startLeft +
+        startRight -
+        newRight;
+
+    }
+
+
+    columnWidths[index] =
+      newLeft;
+
+    columnWidths[index + 1] =
+      newRight;
+
+
+    applyWidths();
+
+  }
+
+
+  function stopResize(){
+
+    document.removeEventListener(
+      'pointermove',
+      moveResize
+    );
+
+    document.removeEventListener(
+      'pointerup',
+      stopResize
+    );
+
+
+    saveWidths();
+
+  }
+
+
+  document.addEventListener(
+    'pointermove',
+    moveResize
+  );
+
+  document.addEventListener(
+    'pointerup',
+    stopResize
+  );
+
+}
+
+
+/* =========================
+   ADD MAIN ROW
 ========================= */
 
 function addRow(data=blank()){
@@ -1287,14 +1504,12 @@ function addRow(data=blank()){
 
 
   const cells = [
-
     name,
     qty,
     kg,
     kilo,
     price,
     total
-
   ];
 
 
@@ -1303,10 +1518,7 @@ function addRow(data=blank()){
     let td;
 
 
-    if(
-      i === 3 ||
-      i === 5
-    ){
+    if(i === 3 || i === 5){
 
       td = x;
 
@@ -1335,11 +1547,8 @@ function addRow(data=blank()){
     inputEl.addEventListener(
       'input',
       ()=>{
-
         calculate();
-
         autoSave();
-
       }
     );
 
@@ -1355,42 +1564,102 @@ function addRow(data=blank()){
    ADD DEDUCTION
 ========================= */
 
-function addDeduction(value=''){
+function addDeduction(
+  data=''
+){
+
+  /*
+     Supports both:
+
+     OLD:
+     "500"
+
+     NEW:
+     {
+       note:"Delivery",
+       amount:"500"
+     }
+  */
+
+  let noteValue = '';
+  let amountValue = '';
+
+
+  if(
+    typeof data === 'object' &&
+    data !== null
+  ){
+
+    noteValue =
+      data.note || '';
+
+    amountValue =
+      data.amount || '';
+
+  }else{
+
+    amountValue =
+      data || '';
+
+  }
+
 
   const tr =
     document.createElement('tr');
 
 
-  const a =
+  /* NOTES CELL */
+
+  const noteCell =
     document.createElement('td');
 
-  const b =
+
+  const note =
+    makeInput(
+      'noteInput',
+      noteValue,
+      'text'
+    );
+
+
+  noteCell.appendChild(note);
+
+
+  /* AMOUNT CELL */
+
+  const amountCell =
     document.createElement('td');
 
 
-  const x =
+  const amount =
     makeInput(
       'deduct',
-      value,
+      amountValue,
       'number'
     );
 
 
-  b.appendChild(x);
+  amountCell.appendChild(amount);
 
 
-  tr.appendChild(a);
-  tr.appendChild(b);
+  tr.appendChild(noteCell);
+
+  tr.appendChild(amountCell);
 
 
-  x.addEventListener(
+  note.addEventListener(
     'input',
     ()=>{
-
-      calculate();
-
       autoSave();
+    }
+  );
 
+
+  amount.addEventListener(
+    'input',
+    ()=>{
+      calculate();
+      autoSave();
     }
   );
 
@@ -1430,10 +1699,20 @@ function getData(){
 
       })),
 
+
     ded:
-      [...document
-        .querySelectorAll('.deduct')]
-      .map(x=>x.value)
+      [...dedEl.rows]
+      .map(r=>({
+
+        note:
+          r.cells[0]
+           .firstChild.value,
+
+        amount:
+          r.cells[1]
+           .firstChild.value
+
+      }))
 
   };
 
@@ -1447,9 +1726,7 @@ function getData(){
 function autoSave(){
 
   if(!currentClient){
-
     return;
-
   }
 
 
@@ -1566,6 +1843,10 @@ function renderTabs(){
         };
 
 
+      /*
+         Double click deletes client.
+      */
+
       button.ondblclick =
         ()=>{
           deleteClient(name);
@@ -1624,13 +1905,16 @@ function loadClient(){
     };
 
 
+  /*
+     Load saved rows.
+  */
+
   (data.rows || [])
     .forEach(addRow);
 
 
   /*
-     START WITH 10 ROWS.
-     MORE CAN BE ADDED.
+     SHOW AT LEAST 10 ROWS
   */
 
   while(
@@ -1642,9 +1926,17 @@ function loadClient(){
   }
 
 
+  /*
+     Load saved deductions.
+  */
+
   (data.ded || [])
     .forEach(addDeduction);
 
+
+  /*
+     Keep 13 deduction rows.
+  */
 
   while(
     dedEl.children.length < 13
@@ -1691,9 +1983,7 @@ function createClient(){
 
 
   if(name === null){
-
     return;
-
   }
 
 
@@ -1712,7 +2002,9 @@ function createClient(){
   }
 
 
-  if(clients[cleanName]){
+  if(
+    clients[cleanName]
+  ){
 
     alert(
       'That client already exists.'
@@ -1919,7 +2211,7 @@ function calculate(){
 
 
 /* =========================
-   ADD ROW
+   ADD ROW BUTTON
 ========================= */
 
 document
@@ -1936,7 +2228,7 @@ document
 
 
 /* =========================
-   REMOVE ROW
+   REMOVE ROW BUTTON
 ========================= */
 
 document
@@ -1985,9 +2277,7 @@ document
 
 
     if(name === null){
-
       return;
-
     }
 
 
@@ -2006,11 +2296,6 @@ document
     }
 
 
-    /*
-       Save this calculation
-       to the current phone.
-    */
-
     let snapshots = {};
 
 
@@ -2019,7 +2304,7 @@ document
       snapshots =
         JSON.parse(
           localStorage.getItem(
-            'TPOST_SNAPSHOTS_V1'
+            SNAPSHOT_KEY
           )
         ) || {};
 
@@ -2035,7 +2320,7 @@ document
 
 
     localStorage.setItem(
-      'TPOST_SNAPSHOTS_V1',
+      SNAPSHOT_KEY,
       JSON.stringify(
         snapshots
       )
@@ -2066,15 +2351,21 @@ document
   .querySelector('#savePNG')
   .onclick = ()=>{
 
+    /*
+       PNG export can be added here.
+       The current calculator data is
+       already saved automatically.
+    */
+
     alert(
-      'PNG saving can be added separately.'
+      'PNG feature is ready to connect to the calculator screen.'
     );
 
   };
 
 
 /* =========================
-   CLEAR
+   CLEAR BUTTON
 ========================= */
 
 document
@@ -2101,6 +2392,10 @@ document
       '';
 
 
+    /*
+       RESET TO EXACTLY 10 ROWS
+    */
+
     for(
       let i=0;
       i<10;
@@ -2111,6 +2406,10 @@ document
 
     }
 
+
+    /*
+       RESET DEDUCTIONS
+    */
 
     for(
       let i=0;
@@ -2131,275 +2430,10 @@ document
 
 
 /* =========================
-   DRAGGABLE COLUMNS
-========================= */
-
-let resizing = false;
-
-let resizeColumn = 0;
-
-let startX = 0;
-
-let startWidths = [];
-
-
-/*
-   Minimum column widths.
-*/
-
-const minWidths = [
-
-  15, // Name
-  8,  // Qty
-  7,  // kg/bag
-  10, // Kilo
-  8,  // Price
-  15  // Total
-
-];
-
-
-/* =========================
-   START DRAG
-========================= */
-
-function startResize(e){
-
-  e.preventDefault();
-
-  e.stopPropagation();
-
-
-  resizing = true;
-
-
-  resizeColumn =
-    Number(
-      e.currentTarget.dataset.col
-    );
-
-
-  if(e.touches){
-
-    startX =
-      e.touches[0].clientX;
-
-  }else{
-
-    startX =
-      e.clientX;
-
-  }
-
-
-  startWidths =
-    [...columnWidths];
-
-
-  document.body.classList.add(
-    'resizing'
-  );
-
-}
-
-
-/* =========================
-   MOVE DIVIDER
-========================= */
-
-function moveResize(e){
-
-  if(!resizing){
-
-    return;
-
-  }
-
-
-  e.preventDefault();
-
-
-  let currentX;
-
-
-  if(e.touches){
-
-    currentX =
-      e.touches[0].clientX;
-
-  }else{
-
-    currentX =
-      e.clientX;
-
-  }
-
-
-  const tableWidth =
-    mainTable.getBoundingClientRect()
-      .width;
-
-
-  const change =
-    ((currentX - startX) /
-      tableWidth) * 100;
-
-
-  const left =
-    resizeColumn;
-
-
-  const right =
-    resizeColumn + 1;
-
-
-  if(right >= 6){
-
-    return;
-
-  }
-
-
-  let leftWidth =
-    startWidths[left] +
-    change;
-
-
-  let rightWidth =
-    startWidths[right] -
-    change;
-
-
-  /*
-     Minimum widths.
-  */
-
-  if(
-    leftWidth <
-    minWidths[left]
-  ){
-
-    leftWidth =
-      minWidths[left];
-
-    rightWidth =
-      startWidths[left] +
-      startWidths[right] -
-      leftWidth;
-
-  }
-
-
-  if(
-    rightWidth <
-    minWidths[right]
-  ){
-
-    rightWidth =
-      minWidths[right];
-
-    leftWidth =
-      startWidths[left] +
-      startWidths[right] -
-      rightWidth;
-
-  }
-
-
-  columnWidths[left] =
-    leftWidth;
-
-
-  columnWidths[right] =
-    rightWidth;
-
-
-  applyWidths();
-
-}
-
-
-/* =========================
-   END DRAG
-========================= */
-
-function stopResize(){
-
-  if(!resizing){
-
-    return;
-
-  }
-
-
-  resizing = false;
-
-
-  document.body.classList.remove(
-    'resizing'
-  );
-
-
-  saveWidths();
-
-}
-
-
-/* =========================
-   TOUCH EVENTS
-========================= */
-
-document
-  .querySelectorAll('.resizeHandle')
-  .forEach(handle=>{
-
-    handle.addEventListener(
-      'touchstart',
-      startResize,
-      {passive:false}
-    );
-
-
-    handle.addEventListener(
-      'mousedown',
-      startResize
-    );
-
-  });
-
-
-document.addEventListener(
-  'touchmove',
-  moveResize,
-  {passive:false}
-);
-
-
-document.addEventListener(
-  'mousemove',
-  moveResize
-);
-
-
-document.addEventListener(
-  'touchend',
-  stopResize
-);
-
-
-document.addEventListener(
-  'mouseup',
-  stopResize
-);
-
-
-/* =========================
    START
 ========================= */
 
 loadWidths();
-
-applyWidths();
 
 loadClients();
 
@@ -2408,6 +2442,8 @@ renderTabs();
 loadClient();
 
 calculate();
+
+setupDividers();
 
 
 /* =========================
@@ -2421,11 +2457,9 @@ if(
   window.addEventListener(
     'load',
     ()=>{
-
       navigator.serviceWorker
         .register('sw.js')
         .catch(()=>{});
-
     }
   );
 
