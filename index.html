@@ -1,27 +1,43 @@
 <!doctype html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 <meta name="theme-color" content="#08dada">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="T-Post">
+
+<meta name="apple-mobile-web-app-capable"
+      content="yes">
+
+<meta name="apple-mobile-web-app-status-bar-style"
+      content="default">
+
+<meta name="apple-mobile-web-app-title"
+      content="KG Amount">
 
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
+
+<link rel="apple-touch-icon"
+      href="icon-192.png">
 
 <title>T-Post</title>
 
+
 <style>
-<style>
+
+/* =========================
+   BASIC
+========================= */
+
 *{
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   width:100%;
@@ -32,269 +48,643 @@ html,body{
 body{
   background:#f4f7f8;
   color:#172024;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
 .app{
   width:100%;
   max-width:1000px;
   margin:auto;
-  padding:4px;
+  padding:8px;
 }
 
 .top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:6px;
+
+  margin-bottom:8px;
 }
 
 h1{
-  font-size:18px;
+  font-size:21px;
   margin:0;
 }
 
 .save{
   font-size:12px;
   color:#667;
-  opacity:.9;
 }
+
+
+/* =========================
+   CARD
+========================= */
 
 .card{
   width:100%;
   max-width:100%;
+
   background:#fff;
+
   border-radius:14px;
+
   box-shadow:0 2px 10px #0001;
+
   overflow:hidden;
 }
 
-/* NO SIDEWAYS SCROLL */
+
+/* =========================
+   MAIN TABLE
+========================= */
+
 .scroll{
   width:100%;
   max-width:100%;
+
   overflow:hidden;
 }
 
-/* MAIN TABLE */
-.scroll > table{
+.main-table{
+
   width:100%;
   max-width:100%;
+
   min-width:0;
+
   table-layout:fixed;
+
   border-collapse:collapse;
+
 }
 
-/* HEADERS */
-.scroll > table th{
-  background:#08dada;
-  padding:6px 1px;
-  text-align:center;
-  font-size:10px;
-  line-height:1.05;
-  white-space:normal;
-  overflow:hidden;
-  word-break:break-word;
-  overflow-wrap:anywhere;
-}
-
-/* CELLS */
-.scroll > table td{
-  border:1px solid #d9dfe2;
-  height:43px;
-  padding:1px;
-  min-width:0;
-  overflow:hidden;
-}
-
-/* INPUTS */
-.scroll > table input{
-  display:block;
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  height:38px;
-  border:0;
-  outline:0;
-  background:transparent;
-  padding:3px 1px;
-  font-size:13px;
-  text-overflow:clip;
-}
-
-input.num{
-  text-align:center;
-}
-
-/* CALCULATED CELLS */
-.scroll > table .calc{
-  text-align:center;
-  padding:3px 1px;
-  font-size:13px;
-  font-variant-numeric:tabular-nums;
-  background:#f8fafb;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:clip;
-}
 
 /* =========================
    COLUMN WIDTHS
 ========================= */
 
-.scroll > table th:nth-child(1),
-.scroll > table td:nth-child(1){
+/*
+Name       = 25%
+Qty        = 12%
+kg/bag     = 9%
+Kilo       = 15%
+Price      = 12%
+Total      = 27%
+
+TOTAL = 100%
+*/
+
+
+.main-table col:nth-child(1){
   width:25%;
 }
 
-.scroll > table th:nth-child(2),
-.scroll > table td:nth-child(2){
+.main-table col:nth-child(2){
   width:12%;
 }
 
-.scroll > table th:nth-child(3),
-.scroll > table td:nth-child(3){
+.main-table col:nth-child(3){
   width:9%;
 }
 
-.scroll > table th:nth-child(4),
-.scroll > table td:nth-child(4){
+.main-table col:nth-child(4){
   width:15%;
 }
 
-.scroll > table th:nth-child(5),
-.scroll > table td:nth-child(5){
+.main-table col:nth-child(5){
   width:12%;
 }
 
-.scroll > table th:nth-child(6),
-.scroll > table td:nth-child(6){
+.main-table col:nth-child(6){
   width:27%;
 }
 
 
-/* SUMMARY */
+/* =========================
+   HEADER
+========================= */
+
+.main-table th{
+
+  background:#08dada;
+
+  height:55px;
+
+  padding:6px 2px;
+
+  text-align:center;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  line-height:1.1;
+
+  white-space:normal;
+
+  overflow:hidden;
+
+  word-break:break-word;
+
+}
+
+
+/* =========================
+   CELLS
+========================= */
+
+.main-table td{
+
+  height:43px;
+
+  padding:1px 2px;
+
+  border:1px solid #d9dfe2;
+
+  overflow:hidden;
+
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+.main-table input{
+
+  display:block;
+
+  width:100%;
+  max-width:100%;
+  min-width:0;
+
+  height:39px;
+
+  border:0;
+
+  outline:0;
+
+  background:transparent;
+
+  padding:3px 2px;
+
+  font-size:15px;
+
+}
+
+
+/* NUMBER INPUTS */
+
+.main-table input.num{
+
+  text-align:center;
+
+}
+
+
+/* =========================
+   CALCULATED CELLS
+========================= */
+
+.calc{
+
+  text-align:center;
+
+  padding:3px 2px;
+
+  font-size:14px;
+
+  font-variant-numeric:
+    tabular-nums;
+
+  white-space:nowrap;
+
+  overflow:hidden;
+
+  text-overflow:clip;
+
+  background:#f8fafb;
+
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
 .summary{
+
   display:grid;
-  grid-template-columns:1fr 1fr;
+
+  grid-template-columns:
+    1fr 1fr;
+
   gap:8px;
+
   padding:8px;
+
 }
 
 .box{
+
   background:#08dada;
+
   border-radius:8px;
+
   padding:8px 10px;
+
 }
 
 .box span{
+
   font-size:13px;
+
 }
 
 .box strong{
+
   display:block;
+
   text-align:right;
+
   font-size:18px;
+
   margin-top:3px;
+
 }
 
 
-/* DEDUCTIONS */
+/* =========================
+   AMOUNT SECTION
+========================= */
+
 .amount{
+
   width:100%;
+  max-width:100%;
+
   padding:0 8px 8px;
+
+  overflow:hidden;
+
 }
 
 .amount table{
+
   width:100%;
-  min-width:0;
   max-width:100%;
+
+  min-width:0;
+
+  table-layout:fixed;
+
   border-collapse:collapse;
+
 }
 
 .amount th{
+
   background:#08dada;
+
   padding:8px 4px;
+
   text-align:left;
+
 }
 
 .amount th:last-child{
+
   text-align:right;
+
 }
 
 .amount td{
+
   height:40px;
+
   border:1px solid #d9dfe2;
+
   padding:2px 4px;
+
 }
 
 .amount .deduct{
+
   width:100%;
+  max-width:100%;
+
   text-align:right;
+
   border:0;
+
   outline:0;
+
   background:transparent;
+
   font-size:16px;
+
 }
 
 .amountTotal{
+
   font-weight:700;
+
 }
 
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
+
 .actions{
+
   display:flex;
+
   gap:8px;
+
   padding:8px;
+
 }
 
 button{
+
   border:0;
+
   border-radius:10px;
+
   padding:10px 12px;
+
   font-size:14px;
+
   font-weight:700;
+
 }
 
 .add{
+
   background:#08dada;
+
 }
 
 .clear{
+
   background:#e7eeee;
+
 }
 
 
-/* VERY SMALL PHONES */
+/* =========================
+   IPHONE
+========================= */
+
+@media(max-width:600px){
+
+  .app{
+
+    width:100%;
+
+    padding:4px;
+
+  }
+
+
+  .top{
+
+    margin-bottom:6px;
+
+  }
+
+
+  h1{
+
+    font-size:18px;
+
+  }
+
+
+  .save{
+
+    display:none;
+
+  }
+
+
+  /* MAIN TABLE */
+
+  .scroll{
+
+    width:100%;
+
+    max-width:100%;
+
+    overflow:hidden;
+
+  }
+
+
+  .main-table{
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+
+    table-layout:fixed;
+
+  }
+
+
+  /* HEADER */
+
+  .main-table th{
+
+    height:55px;
+
+    font-size:11px;
+
+    padding:5px 1px;
+
+    line-height:1.05;
+
+    white-space:normal;
+
+    word-break:break-word;
+
+  }
+
+
+  /* CELLS */
+
+  .main-table td{
+
+    height:43px;
+
+    padding:1px;
+
+  }
+
+
+  /* INPUTS */
+
+  .main-table input{
+
+    width:100%;
+
+    max-width:100%;
+
+    min-width:0;
+
+    height:39px;
+
+    padding:3px 1px;
+
+    font-size:14px;
+
+  }
+
+
+  .main-table input.num{
+
+    text-align:center;
+
+  }
+
+
+  /* CALCULATED */
+
+  .main-table .calc{
+
+    width:100%;
+
+    padding:3px 1px;
+
+    font-size:13px;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+  }
+
+
+  /* SUMMARY */
+
+  .summary{
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:6px;
+
+    padding:6px;
+
+  }
+
+
+  .box{
+
+    padding:7px 8px;
+
+  }
+
+
+  .box span{
+
+    font-size:12px;
+
+  }
+
+
+  .box strong{
+
+    font-size:16px;
+
+  }
+
+
+  /* AMOUNT */
+
+  .amount{
+
+    padding:0 6px 6px;
+
+  }
+
+
+  /* BUTTONS */
+
+  .actions{
+
+    padding:6px;
+
+  }
+
+
+  button{
+
+    padding:10px;
+
+    font-size:13px;
+
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL IPHONE
+========================= */
+
 @media(max-width:390px){
 
-  .scroll > table th{
-    font-size:9px;
+  .main-table th{
+
+    font-size:10px;
+
   }
 
-  .scroll > table input{
-    font-size:12px;
+  .main-table input{
+
+    font-size:13px;
+
   }
 
-  .scroll > table .calc{
+  .main-table .calc{
+
     font-size:12px;
+
   }
 
 }
-</style>
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="app">
+
+
+  <!-- TITLE -->
 
   <div class="top">
 
-    <h1>T-Post</h1>
+    <h1>
+      KG & Amount Calculator
+    </h1>
 
     <span
       class="save"
@@ -309,28 +699,68 @@ button{
 
 
     <!-- =========================
-         MAIN CALCULATOR TABLE
-    ========================= -->
+         MAIN TABLE
+    ========================== -->
 
     <div class="scroll">
 
-      <table>
+      <table class="main-table">
+
+
+        <!-- FIXED 6 COLUMN WIDTHS -->
+
+        <colgroup>
+
+          <col style="width:25%">
+
+          <col style="width:12%">
+
+          <col style="width:9%">
+
+          <col style="width:15%">
+
+          <col style="width:12%">
+
+          <col style="width:27%">
+
+        </colgroup>
+
 
         <thead>
 
           <tr>
-            <th>Name</th>
-            <th>Qty</th>
-            <th>kg/bag</th>
-            <th>Kilo</th>
-            <th>Price</th>
-            <th>Total Amount</th>
+
+            <th>
+              Name
+            </th>
+
+            <th>
+              Qty
+            </th>
+
+            <th>
+              kg/bag
+            </th>
+
+            <th>
+              Kilo
+            </th>
+
+            <th>
+              Price
+            </th>
+
+            <th>
+              Total Amount
+            </th>
+
           </tr>
 
         </thead>
 
 
         <tbody id="rows"></tbody>
+
 
       </table>
 
@@ -339,13 +769,16 @@ button{
 
     <!-- =========================
          SUMMARY
-    ========================= -->
+    ========================== -->
 
     <div class="summary">
 
+
       <div class="box">
 
-        <span>Σ kilo</span>
+        <span>
+          Σ kilo
+        </span>
 
         <strong id="sumKilo">
           0
@@ -356,7 +789,9 @@ button{
 
       <div class="box">
 
-        <span>Σ Total Amount</span>
+        <span>
+          Σ Total Amount
+        </span>
 
         <strong id="sumAmount">
           0
@@ -364,22 +799,32 @@ button{
 
       </div>
 
+
     </div>
 
 
     <!-- =========================
          AMOUNT / DEDUCTIONS
-    ========================= -->
+    ========================== -->
 
     <div class="amount">
 
+
       <table>
+
 
         <thead>
 
           <tr>
-            <th>Amount</th>
-            <th>Amount</th>
+
+            <th>
+              Amount
+            </th>
+
+            <th>
+              Amount
+            </th>
+
           </tr>
 
         </thead>
@@ -406,6 +851,7 @@ button{
 
         </tfoot>
 
+
       </table>
 
     </div>
@@ -413,32 +859,40 @@ button{
 
     <!-- =========================
          BUTTONS
-    ========================= -->
+    ========================== -->
 
     <div class="actions">
+
 
       <button
         class="add"
         id="add">
+
         ＋ Add row
+
       </button>
 
 
       <button
         class="clear"
         id="clear">
+
         Clear all
+
       </button>
+
 
     </div>
 
 
   </div>
 
+
 </div>
 
 
 <script>
+
 
 /* =========================
    ELEMENTS
@@ -459,10 +913,12 @@ const KEY =
 ========================= */
 
 const blank = () => ({
+
   name:'',
   qty:'',
   kgBag:'',
   price:''
+
 });
 
 
@@ -484,9 +940,11 @@ function num(v){
 function fmt(v){
 
   return Number.isInteger(v)
+
     ? String(v)
+
     : v.toFixed(2)
-      .replace(/\.?0+$/,'');
+       .replace(/\.?0+$/,'');
 
 }
 
@@ -502,7 +960,7 @@ function input(
   ph=''
 ){
 
-  const e =
+  let e =
     document.createElement('input');
 
   e.className = cls;
@@ -513,13 +971,13 @@ function input(
 
   e.placeholder = ph;
 
+
   if(type === 'number'){
 
     e.step = 'any';
 
-    e.inputMode = 'decimal';
-
   }
+
 
   return e;
 
@@ -532,13 +990,14 @@ function input(
 
 function addRow(d=blank()){
 
-  const tr =
+
+  let tr =
     document.createElement('tr');
 
 
   /* NAME */
 
-  const name =
+  let name =
     input(
       '',
       d.name
@@ -547,7 +1006,7 @@ function addRow(d=blank()){
 
   /* QTY */
 
-  const qty =
+  let qty =
     input(
       'num',
       d.qty,
@@ -557,7 +1016,7 @@ function addRow(d=blank()){
 
   /* KG/BAG */
 
-  const kg =
+  let kg =
     input(
       'num',
       d.kgBag,
@@ -567,7 +1026,7 @@ function addRow(d=blank()){
 
   /* PRICE */
 
-  const price =
+  let price =
     input(
       'num',
       d.price,
@@ -577,7 +1036,7 @@ function addRow(d=blank()){
 
   /* KILO */
 
-  const kilo =
+  let kilo =
     document.createElement('td');
 
   kilo.className =
@@ -586,32 +1045,46 @@ function addRow(d=blank()){
 
   /* TOTAL AMOUNT */
 
-  const total =
+  let total =
     document.createElement('td');
 
   total.className =
     'calc total';
 
 
-  const cells = [
+  let cells = [
+
     name,
     qty,
     kg,
     kilo,
     price,
     total
+
   ];
 
 
   cells.forEach((x,i)=>{
 
+
     let td;
 
-    if(i===3 || i===5){
+
+    /*
+      Kilo and Total Amount
+      are already TD elements.
+    */
+
+    if(
+      i === 3 ||
+      i === 5
+    ){
 
       td = x;
 
-    }else{
+    }
+
+    else{
 
       td =
         document.createElement('td');
@@ -620,18 +1093,20 @@ function addRow(d=blank()){
 
     }
 
+
     tr.appendChild(td);
 
   });
 
 
-  /* AUTO CALCULATE */
+  /* CALCULATE WHEN TYPING */
 
   [
     name,
     qty,
     kg,
     price
+
   ].forEach(x=>{
 
     x.addEventListener(
@@ -653,17 +1128,19 @@ function addRow(d=blank()){
 
 function addDeduction(v=''){
 
-  const tr =
+  let tr =
     document.createElement('tr');
 
-  const a =
+
+  let a =
     document.createElement('td');
 
-  const b =
+
+  let b =
     document.createElement('td');
 
 
-  const x =
+  let x =
     input(
       'deduct',
       v,
@@ -672,6 +1149,7 @@ function addDeduction(v=''){
 
 
   b.appendChild(x);
+
 
   tr.appendChild(a);
 
@@ -700,49 +1178,55 @@ function calculate(){
   let sa = 0;
 
 
-  [...rowsEl.rows].forEach(r=>{
+  [
+    ...rowsEl.rows
 
-    const q =
+  ].forEach(r=>{
+
+
+    let q =
       num(
         r.cells[1]
          .firstChild.value
       );
 
 
-    const kg =
+    let kg =
       num(
         r.cells[2]
          .firstChild.value
       );
 
 
-    const p =
+    let p =
       num(
         r.cells[4]
          .firstChild.value
       );
 
 
-    /* QTY × KG/BAG */
+    /* KILO */
 
-    const k =
+    let k =
       q * kg;
 
 
-    /* KILO × PRICE */
+    /* TOTAL AMOUNT */
 
-    const t =
+    let t =
       k * p;
 
 
-    r.querySelector('.kilo')
-     .textContent =
-     fmt(k);
+    r.querySelector(
+      '.kilo'
+    ).textContent =
+      fmt(k);
 
 
-    r.querySelector('.total')
-     .textContent =
-     fmt(t);
+    r.querySelector(
+      '.total'
+    ).textContent =
+      fmt(t);
 
 
     sk += k;
@@ -754,7 +1238,7 @@ function calculate(){
 
   /* =========================
      DEDUCTIONS
-  ========================= */
+  ========================== */
 
   let d = 0;
 
@@ -769,25 +1253,25 @@ function calculate(){
 
 
   /* =========================
-     TOTALS
-  ========================= */
+     SUMMARY
+  ========================== */
 
-  document
-    .querySelector('#sumKilo')
-    .textContent =
+  document.querySelector(
+    '#sumKilo'
+  ).textContent =
     fmt(sk);
 
 
-  document
-    .querySelector('#sumAmount')
-    .textContent =
+  document.querySelector(
+    '#sumAmount'
+  ).textContent =
     fmt(sa);
 
 
-  document
-    .querySelector('#amountTotal')
-    .textContent =
-    fmt(sa-d);
+  document.querySelector(
+    '#amountTotal'
+  ).textContent =
+    fmt(sa - d);
 
 
   /* SAVE */
@@ -795,49 +1279,60 @@ function calculate(){
   save();
 
 
-  document
-    .querySelector('#saveState')
-    .textContent =
+  document.querySelector(
+    '#saveState'
+  ).textContent =
     'Saved';
 
 }
 
 
 /* =========================
-   SAVE
+   SAVE DATA
 ========================= */
 
 function save(){
 
-  const data = {
+  let data = {
+
 
     rows:
-      [...rowsEl.rows]
-      .map(r=>({
+      [
+        ...rowsEl.rows
+
+      ].map(r=>({
+
 
         name:
           r.cells[0]
            .firstChild.value,
 
+
         qty:
           r.cells[1]
            .firstChild.value,
+
 
         kgBag:
           r.cells[2]
            .firstChild.value,
 
+
         price:
           r.cells[4]
            .firstChild.value
 
+
       })),
+
 
     ded:
       [
         ...document
           .querySelectorAll('.deduct')
+
       ].map(x=>x.value)
+
 
   };
 
@@ -856,9 +1351,11 @@ function save(){
 
 function load(){
 
+
   try{
 
-    const d =
+
+    let d =
       JSON.parse(
         localStorage.getItem(KEY)
       );
@@ -866,35 +1363,55 @@ function load(){
 
     if(d){
 
+
+      /*
+        If saved data exists,
+        load it.
+      */
+
       (d.rows || [])
         .forEach(addRow);
 
+
       (d.ded || [])
         .forEach(addDeduction);
+
 
       return;
 
     }
 
-  }catch(e){
-
-    console.log(e);
 
   }
 
+  catch(e){}
 
-  /* DEFAULT 15 ROWS */
 
-  for(let i=0;i<15;i++){
+  /*
+    FIRST TIME:
+    SHOW ONLY 10 ROWS
+  */
+
+  for(
+    let i = 0;
+    i < 10;
+    i++
+  ){
 
     addRow();
 
   }
 
 
-  /* DEFAULT 13 DEDUCTIONS */
+  /*
+    DEDUCTION ROWS
+  */
 
-  for(let i=0;i<13;i++){
+  for(
+    let i = 0;
+    i < 13;
+    i++
+  ){
 
     addDeduction();
 
@@ -907,59 +1424,80 @@ function load(){
    ADD ROW BUTTON
 ========================= */
 
-document
-  .querySelector('#add')
-  .onclick = () => {
+document.querySelector(
+  '#add'
+).onclick = function(){
 
-    addRow();
 
-    calculate();
+  addRow();
 
-  };
+
+  calculate();
+
+
+};
 
 
 /* =========================
-   CLEAR ALL BUTTON
+   CLEAR ALL
 ========================= */
 
-document
-  .querySelector('#clear')
-  .onclick = () => {
+document.querySelector(
+  '#clear'
+).onclick = function(){
 
-    if(
-      confirm(
-        'Clear all entries?'
-      )
+
+  if(
+    confirm(
+      'Clear all entries?'
+    )
+  ){
+
+
+    rowsEl.innerHTML = '';
+
+    dedEl.innerHTML = '';
+
+
+    /*
+      RESET TO 10 ROWS
+    */
+
+    for(
+      let i = 0;
+      i < 10;
+      i++
     ){
 
-      rowsEl.innerHTML = '';
-
-      dedEl.innerHTML = '';
-
-
-      for(let i=0;i<15;i++){
-
-        addRow();
-
-      }
-
-
-      for(let i=0;i<13;i++){
-
-        addDeduction();
-
-      }
-
-
-      calculate();
+      addRow();
 
     }
 
-  };
+
+    /*
+      RESET DEDUCTIONS
+    */
+
+    for(
+      let i = 0;
+      i < 13;
+      i++
+    ){
+
+      addDeduction();
+
+    }
+
+
+    calculate();
+
+  }
+
+};
 
 
 /* =========================
-   START APP
+   START
 ========================= */
 
 load();
@@ -977,10 +1515,11 @@ if(
 
   window.addEventListener(
     'load',
-    () => {
+    function(){
 
-      navigator.serviceWorker
-        .register('sw.js');
+      navigator.serviceWorker.register(
+        'sw.js'
+      );
 
     }
   );
