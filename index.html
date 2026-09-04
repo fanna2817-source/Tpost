@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08dada">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="KG Amount">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>KG & Amount Calculator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7f8;color:#172024;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.app{max-width:1000px;margin:auto;padding:12px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+h1{font-size:21px;margin:0}.save{font-size:12px;color:#667;opacity:.9}
+.card{background:#fff;border-radius:14px;box-shadow:0 2px 10px #0001;overflow:hidden}.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:760px}th{background:#08dada;padding:10px 6px;text-align:center;font-size:14px}
+td{border:1px solid #d9dfe2;height:43px;padding:2px 5px}input{width:100%;height:37px;border:0;outline:0;background:transparent;padding:6px;font-size:16px}
+input.num{text-align:right}.calc{text-align:right;padding:7px;font-variant-numeric:tabular-nums;background:#f8fafb}
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:12px}.box{background:#08dada;border-radius:8px;padding:9px 12px}
+.box span{font-size:13px}.box strong{display:block;text-align:right;font-size:18px;margin-top:3px}
+.amount{padding:0 12px 12px}.amount table{min-width:0;width:100%}.amount th{text-align:left}.amount th:last-child{text-align:right}
+.amount td{height:40px}.amount .deduct{text-align:right}.amountTotal{font-weight:700}
+.actions{display:flex;gap:8px;padding:12px}button{border:0;border-radius:10px;padding:11px 16px;font-size:15px;font-weight:700}
+.add{background:#08dada}.clear{background:#e7eeee}
+@media(max-width:600px){.app{padding:8px}.summary{grid-template-columns:1fr}.save{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><h1>KG & Amount Calculator</h1><span class="save" id="saveState">Saved</span></div>
+<div class="card">
+<div class="scroll"><table><thead><tr>
+<th>Name</th><th>Qty</th><th>kg/bag</th><th>Kilo</th><th>Price</th><th>Total Amount</th>
+</tr></thead><tbody id="rows"></tbody></table></div>
+<div class="summary">
+<div class="box"><span>Σ kilo</span><strong id="sumKilo">0</strong></div>
+<div class="box"><span>Σ Total Amount</span><strong id="sumAmount">0</strong></div>
+</div>
+<div class="amount"><table><thead><tr><th>Amount</th><th>Amount</th></tr></thead>
+<tbody id="deductions"></tbody>
+<tfoot><tr><td class="amountTotal">Amount total</td><td class="calc amountTotal" id="amountTotal">0</td></tr></tfoot>
+</table></div>
+<div class="actions"><button class="add" id="add">＋ Add row</button><button class="clear" id="clear">Clear all</button></div>
+</div></div>
+<script>
+const rowsEl=document.querySelector('#rows'), dedEl=document.querySelector('#deductions');
+const KEY='kgAmountPWA';
+const blank=()=>({name:'',qty:'',kgBag:'',price:''});
+function num(v){return Number.parseFloat(v)||0}
+function fmt(v){return Number.isInteger(v)?String(v):v.toFixed(2).replace(/\.?0+$/,'')}
+function input(cls,val,type='text',ph=''){let e=document.createElement('input');e.className=cls;e.value=val||'';e.type=type;e.placeholder=ph;if(type==='number')e.step='any';return e}
+function addRow(d=blank()){
+ let tr=document.createElement('tr');
+ let name=input('',d.name),qty=input('num',d.qty,'number'),kg=input('num',d.kgBag,'number'),price=input('num',d.price,'number');
+ let kilo=document.createElement('td');kilo.className='calc kilo';let total=document.createElement('td');total.className='calc total';
+ let cells=[name,qty,kg,kilo,price,total];
+ cells.forEach((x,i)=>{let td=i===3||i===5?x:document.createElement('td');if(td!==x)td.appendChild(x);tr.appendChild(td)});
+ [name,qty,kg,price].forEach(x=>x.addEventListener('input',calculate));rowsEl.appendChild(tr);
+}
+function addDeduction(v=''){
+ let tr=document.createElement('tr'),a=document.createElement('td'),b=document.createElement('td');
+ let x=input('deduct',v,'number');b.appendChild(x);tr.append(a,b);x.addEventListener('input',calculate);dedEl.appendChild(tr);
+}
+function calculate(){
+ let sk=0,sa=0;
+ [...rowsEl.rows].forEach(r=>{
+  let q=num(r.cells[1].firstChild.value),kg=num(r.cells[2].firstChild.value),p=num(r.cells[4].firstChild.value);
+  let k=q*kg,t=k*p;r.querySelector('.kilo').textContent=fmt(k);r.querySelector('.total').textContent=fmt(t);sk+=k;sa+=t;
+ });
+ let d=0;document.querySelectorAll('.deduct').forEach(x=>d+=num(x.value));
+ document.querySelector('#sumKilo').textContent=fmt(sk);document.querySelector('#sumAmount').textContent=fmt(sa);
+ document.querySelector('#amountTotal').textContent=fmt(sa-d);
+ save();document.querySelector('#saveState').textContent='Saved';
+}
+function save(){
+ let data={rows:[...rowsEl.rows].map(r=>({name:r.cells[0].firstChild.value,qty:r.cells[1].firstChild.value,kgBag:r.cells[2].firstChild.value,price:r.cells[4].firstChild.value})),ded:[...document.querySelectorAll('.deduct')].map(x=>x.value)};
+ localStorage.setItem(KEY,JSON.stringify(data));
+}
+function load(){
+ try{let d=JSON.parse(localStorage.getItem(KEY));if(d){(d.rows||[]).forEach(addRow);(d.ded||[]).forEach(addDeduction);return}}catch(e){}
+ for(let i=0;i<15;i++)addRow();for(let i=0;i<13;i++)addDeduction();
+}
+document.querySelector('#add').onclick=()=>{addRow();calculate();};
+document.querySelector('#clear').onclick=()=>{if(confirm('Clear all entries?')){rowsEl.innerHTML='';dedEl.innerHTML='';for(let i=0;i<15;i++)addRow();for(let i=0;i<13;i++)addDeduction();calculate();}};
+load();calculate();
+if('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+</script>
+</body></html>
