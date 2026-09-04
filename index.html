@@ -1,16 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 
 <meta name="viewport"
-      content="width=device-width,initial-scale=1,viewport-fit=cover">
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               user-scalable=no,
+               viewport-fit=cover">
 
 <meta name="theme-color" content="#08dada">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="KG Amount">
+<meta name="apple-mobile-web-app-title" content="T-Post">
 
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
@@ -32,42 +37,113 @@ body{
   margin:0;
   padding:0;
   width:100%;
+  max-width:100%;
   overflow-x:hidden;
 }
 
 body{
   background:#f4f7f8;
   color:#172024;
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Arial,
-    sans-serif;
+  font-family:-apple-system,
+              BlinkMacSystemFont,
+              "Segoe UI",
+              Arial,
+              sans-serif;
 }
 
 .app{
   width:100%;
   max-width:1000px;
   margin:0 auto;
-  padding:8px;
+  padding:4px;
 }
+
+
+/* =========================
+   TOP
+========================= */
 
 .top{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:8px;
+  width:100%;
+  margin-bottom:5px;
 }
 
 h1{
-  font-size:21px;
   margin:0;
+  font-size:20px;
+  line-height:1.2;
 }
 
 .save{
-  font-size:12px;
+  font-size:11px;
   color:#667;
+}
+
+
+/* =========================
+   CLIENT TABS
+========================= */
+
+.clientBar{
+  display:flex;
+  align-items:flex-end;
+  gap:4px;
+
+  width:100%;
+  max-width:100%;
+
+  overflow-x:auto;
+  overflow-y:hidden;
+
+  padding:2px 0 5px;
+
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.clientBar::-webkit-scrollbar{
+  display:none;
+}
+
+.clientTab{
+  flex:0 0 auto;
+
+  border:0;
+  border-radius:9px 9px 0 0;
+
+  padding:8px 12px;
+
+  background:#dfe8e9;
+  color:#172024;
+
+  font-size:12px;
+  font-weight:700;
+
+  white-space:nowrap;
+}
+
+.clientTab.active{
+  background:#08dada;
+}
+
+.newClient{
+  flex:0 0 auto;
+
+  border:0;
+  border-radius:9px;
+
+  padding:8px 11px;
+
+  background:#172024;
+  color:#fff;
+
+  font-size:12px;
+  font-weight:700;
+
+  white-space:nowrap;
 }
 
 
@@ -77,101 +153,192 @@ h1{
 
 .card{
   width:100%;
+  max-width:100%;
+
   background:#fff;
-  border-radius:14px;
+
+  border-radius:0 14px 14px 14px;
+
   box-shadow:0 2px 10px #0001;
+
+  overflow:hidden;
+}
+
+
+/* =========================
+   TABLE WRAPPER
+========================= */
+
+.scroll{
+  width:100%;
+  max-width:100%;
+
   overflow:hidden;
 }
 
 
 /* =========================
    MAIN TABLE
-========================= */
 
-.scroll{
-  width:100%;
-  overflow-x:hidden;
-}
+   IMPORTANT:
+   TOTAL WIDTH = 100%
+
+   Name          25%
+   Qty           12%
+   kg/bag         9%
+   Kilo          15%
+   Price         12%
+   Total Amount  27%
+========================= */
 
 .mainTable{
   width:100%;
   max-width:100%;
   min-width:0;
+
   border-collapse:collapse;
+
   table-layout:fixed;
 }
 
-/* EXACT COLUMN WIDTHS
-   25 + 12 + 9 + 15 + 12 + 27 = 100%
-*/
 
-.mainTable col:nth-child(1){
+/* COLUMN 1 - NAME */
+
+.mainTable th:nth-child(1),
+.mainTable td:nth-child(1){
   width:25%;
 }
 
-.mainTable col:nth-child(2){
+
+/* COLUMN 2 - QTY */
+
+.mainTable th:nth-child(2),
+.mainTable td:nth-child(2){
   width:12%;
 }
 
-.mainTable col:nth-child(3){
+
+/* COLUMN 3 - KG/BAG */
+
+.mainTable th:nth-child(3),
+.mainTable td:nth-child(3){
   width:9%;
 }
 
-.mainTable col:nth-child(4){
+
+/* COLUMN 4 - KILO */
+
+.mainTable th:nth-child(4),
+.mainTable td:nth-child(4){
   width:15%;
 }
 
-.mainTable col:nth-child(5){
+
+/* COLUMN 5 - PRICE */
+
+.mainTable th:nth-child(5),
+.mainTable td:nth-child(5){
   width:12%;
 }
 
-.mainTable col:nth-child(6){
+
+/* COLUMN 6 - TOTAL AMOUNT */
+
+.mainTable th:nth-child(6),
+.mainTable td:nth-child(6){
   width:27%;
 }
 
 
+/* =========================
+   TABLE HEADER
+========================= */
+
 .mainTable th{
   background:#08dada;
-  padding:10px 3px;
+
+  padding:8px 2px;
+
   text-align:center;
-  font-size:14px;
-  line-height:1.1;
+
+  font-size:12px;
+  line-height:1.05;
+
   white-space:normal;
+
   overflow-wrap:anywhere;
+  word-break:normal;
+
+  overflow:hidden;
 }
+
+
+/* =========================
+   TABLE CELLS
+========================= */
 
 .mainTable td{
   border:1px solid #d9dfe2;
+
   height:43px;
-  padding:1px 3px;
+
+  padding:1px;
+
   overflow:hidden;
 }
+
+
+/* =========================
+   INPUTS
+========================= */
 
 .mainTable input{
   display:block;
+
   width:100%;
   max-width:100%;
   min-width:0;
-  height:38px;
+
+  height:39px;
+
   border:0;
   outline:0;
+
   background:transparent;
-  padding:4px 2px;
-  font-size:16px;
+
+  padding:3px 2px;
+
+  font-size:15px;
+
+  color:#172024;
 }
 
 .mainTable input.num{
-  text-align:right;
+  text-align:center;
 }
 
+
+/* =========================
+   CALCULATED CELLS
+========================= */
+
 .mainTable .calc{
-  text-align:right;
-  padding:5px 3px;
-  font-variant-numeric:tabular-nums;
+  text-align:center;
+
+  padding:3px 1px;
+
+  font-size:13px;
+
+  font-variant-numeric:
+    tabular-nums;
+
   background:#f8fafb;
+
   white-space:nowrap;
+
   overflow:hidden;
-  text-overflow:ellipsis;
+
+  text-overflow:clip;
 }
 
 
@@ -181,26 +348,40 @@ h1{
 
 .summary{
   display:grid;
+
   grid-template-columns:1fr 1fr;
-  gap:8px;
-  padding:8px;
+
+  gap:6px;
+
+  padding:7px;
 }
 
 .box{
   background:#08dada;
+
   border-radius:8px;
-  padding:8px 10px;
+
+  padding:7px 9px;
+
+  min-width:0;
 }
 
 .box span{
-  font-size:13px;
+  font-size:12px;
 }
 
 .box strong{
   display:block;
+
   text-align:right;
-  font-size:18px;
+
+  font-size:17px;
+
   margin-top:3px;
+
+  overflow:hidden;
+
+  text-overflow:ellipsis;
 }
 
 
@@ -210,21 +391,31 @@ h1{
 
 .amount{
   width:100%;
-  padding:0 8px 8px;
+  max-width:100%;
+
+  padding:0 7px 7px;
+
+  overflow:hidden;
 }
 
 .amount table{
   width:100%;
-  min-width:0;
   max-width:100%;
+  min-width:0;
+
   border-collapse:collapse;
+
   table-layout:fixed;
 }
 
 .amount th{
   background:#08dada;
+
   padding:8px 4px;
+
   text-align:left;
+
+  font-size:12px;
 }
 
 .amount th:last-child{
@@ -233,18 +424,26 @@ h1{
 
 .amount td{
   height:40px;
+
   border:1px solid #d9dfe2;
+
   padding:2px 4px;
 }
 
 .amount .deduct{
   display:block;
+
   width:100%;
+  max-width:100%;
+
   text-align:right;
+
   border:0;
   outline:0;
+
   background:transparent;
-  font-size:16px;
+
+  font-size:15px;
 }
 
 .amountTotal{
@@ -258,22 +457,49 @@ h1{
 
 .actions{
   display:flex;
-  gap:8px;
-  padding:8px;
-  padding-bottom:12px;
+
+  flex-wrap:wrap;
+
+  gap:5px;
+
+  width:100%;
+  max-width:100%;
+
+  padding:7px 7px 10px;
 }
 
-button{
+.actions button{
+  flex:1 1 auto;
+
+  min-width:0;
+
   border:0;
-  border-radius:10px;
-  padding:11px 16px;
-  font-size:15px;
+
+  border-radius:9px;
+
+  padding:10px 6px;
+
+  font-size:12px;
+
   font-weight:700;
-  cursor:pointer;
+
+  white-space:nowrap;
 }
 
 .add{
   background:#08dada;
+}
+
+.remove{
+  background:#ffdede;
+}
+
+.saveBtn{
+  background:#dffafa;
+}
+
+.png{
+  background:#dffafa;
 }
 
 .clear{
@@ -282,17 +508,17 @@ button{
 
 
 /* =========================
-   IPHONE
+   SMALL PHONE
 ========================= */
 
-@media(max-width:400px){
+@media(max-width:600px){
 
   .app{
-    padding:4px;
+    padding:3px;
   }
 
   .top{
-    margin-bottom:6px;
+    margin-bottom:4px;
   }
 
   h1{
@@ -303,115 +529,168 @@ button{
     display:none;
   }
 
-  /* KEEP ALL 6 COLUMNS ON SCREEN */
+
+  /* CLIENT TABS */
+
+  .clientTab,
+  .newClient{
+    font-size:11px;
+    padding:8px 9px;
+  }
+
+
+  /* MAIN TABLE */
+
+  .scroll{
+    width:100%;
+    max-width:100%;
+    overflow:hidden;
+  }
+
   .mainTable{
     width:100%;
+    max-width:100%;
     min-width:0;
+
     table-layout:fixed;
   }
 
+
+  /* HEADER */
+
   .mainTable th{
-    font-size:10px;
-    padding:8px 1px;
+    font-size:9px;
+
+    line-height:1.05;
+
+    padding:7px 1px;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
   }
+
+
+  /* CELLS */
 
   .mainTable td{
     height:43px;
     padding:1px;
   }
 
+
+  /* INPUT */
+
   .mainTable input{
-    height:38px;
-    padding:4px 1px;
-    font-size:13px;
-  }
-
-  .mainTable input.num{
-    text-align:center;
-  }
-
-  .mainTable .calc{
-    padding:4px 1px;
-    font-size:12px;
-    text-align:center;
-  }
-
-  .summary{
-    grid-template-columns:1fr 1fr;
-    gap:6px;
-    padding:7px;
-  }
-
-  .box{
-    padding:7px 8px;
-  }
-
-  .box span{
-    font-size:12px;
-  }
-
-  .box strong{
-    font-size:16px;
-  }
-
-  .amount{
-    padding:0 7px 7px;
-  }
-
-  .amount th{
-    font-size:13px;
-    padding:7px 3px;
-  }
-
-  .amount td{
-    height:38px;
-  }
-
-  .amount .deduct{
-    font-size:14px;
-  }
-
-  /* BUTTONS ALWAYS VISIBLE AFTER 10 ROWS */
-  .actions{
-    display:flex;
     width:100%;
-    padding:8px;
-    padding-bottom:12px;
-  }
+    max-width:100%;
+    min-width:0;
 
-  button{
-    flex:1;
-    padding:11px 8px;
-    font-size:14px;
-  }
-}
+    height:39px;
 
+    padding:3px 1px;
 
-/* =========================
-   VERY SMALL IPHONES
-========================= */
-
-@media(max-width:390px){
-
-  .mainTable th{
-    font-size:9px;
-  }
-
-  .mainTable input{
     font-size:12px;
   }
 
   .mainTable .calc{
     font-size:11px;
+
+    padding:3px 1px;
   }
 
-  button{
-    font-size:13px;
+
+  /* SUMMARY */
+
+  .summary{
+    grid-template-columns:1fr 1fr;
+
+    gap:5px;
+
+    padding:6px;
+  }
+
+  .box{
+    padding:6px 7px;
+  }
+
+  .box span{
+    font-size:10px;
+  }
+
+  .box strong{
+    font-size:15px;
+  }
+
+
+  /* AMOUNT */
+
+  .amount{
+    padding:0 6px 6px;
+  }
+
+
+  /* BUTTONS */
+
+  .actions{
+    display:grid;
+
+    grid-template-columns:
+      repeat(3,1fr);
+
+    gap:4px;
+
+    padding:6px;
+  }
+
+  .actions button{
+    width:100%;
+
+    min-width:0;
+
+    padding:10px 2px;
+
+    font-size:10px;
+  }
+
+}
+
+
+/* =========================
+   VERY SMALL IPHONE
+========================= */
+
+@media(max-width:390px){
+
+  h1{
+    font-size:17px;
+  }
+
+  .mainTable th{
+    font-size:8px;
+  }
+
+  .mainTable input{
+    font-size:11px;
+  }
+
+  .mainTable .calc{
+    font-size:10px;
+  }
+
+  .actions{
+    grid-template-columns:
+      repeat(3,1fr);
+  }
+
+  .actions button{
+    font-size:9px;
   }
 
 }
 
 </style>
+
 </head>
 
 
@@ -419,10 +698,14 @@ button{
 
 <div class="app">
 
-  <!-- TITLE -->
+
+  <!-- =====================
+       TOP
+  ====================== -->
+
   <div class="top">
 
-    <h1>KG & Amount Calculator</h1>
+    <h1>T-Post</h1>
 
     <span
       class="save"
@@ -433,41 +716,68 @@ button{
   </div>
 
 
+  <!-- =====================
+       CLIENT TABS
+  ====================== -->
+
+  <div
+    class="clientBar"
+    id="clientBar">
+  </div>
+
+
+  <!-- =====================
+       CARD
+  ====================== -->
+
   <div class="card">
 
+
     <!-- =====================
-         MAIN CALCULATOR
+         MAIN TABLE
     ====================== -->
-<div class="scroll">
 
-  <table class="mainTable"
-         style="width:100%;min-width:0;table-layout:fixed;">
+    <div class="scroll">
 
-    <colgroup>
-      <col style="width:25%">
-      <col style="width:12%">
-      <col style="width:9%">
-      <col style="width:15%">
-      <col style="width:12%">
-      <col style="width:27%">
-    </colgroup>
+      <table class="mainTable">
 
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Qty</th>
-        <th>kg/bag</th>
-        <th>Kilo</th>
-        <th>Price</th>
-        <th>Total Amount</th>
-      </tr>
-    </thead>
+        <colgroup>
 
-    <tbody id="rows"></tbody>
+          <col style="width:25%">
+          <col style="width:12%">
+          <col style="width:9%">
+          <col style="width:15%">
+          <col style="width:12%">
+          <col style="width:27%">
 
-  </table>
+        </colgroup>
 
-</div>
+
+        <thead>
+
+          <tr>
+
+            <th>Name</th>
+
+            <th>Qty</th>
+
+            <th>kg/bag</th>
+
+            <th>Kilo</th>
+
+            <th>Price</th>
+
+            <th>Total Amount</th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="rows">
+        </tbody>
+
+      </table>
 
     </div>
 
@@ -480,7 +790,9 @@ button{
 
       <div class="box">
 
-        <span>Σ kilo</span>
+        <span>
+          Σ kilo
+        </span>
 
         <strong id="sumKilo">
           0
@@ -491,7 +803,9 @@ button{
 
       <div class="box">
 
-        <span>Σ Total Amount</span>
+        <span>
+          Σ Total Amount
+        </span>
 
         <strong id="sumAmount">
           0
@@ -513,13 +827,23 @@ button{
         <thead>
 
           <tr>
-            <th>Amount</th>
-            <th>Amount</th>
+
+            <th>
+              Amount
+            </th>
+
+            <th>
+              Amount
+            </th>
+
           </tr>
 
         </thead>
 
-        <tbody id="deductions"></tbody>
+
+        <tbody id="deductions">
+        </tbody>
+
 
         <tfoot>
 
@@ -553,16 +877,39 @@ button{
       <button
         class="add"
         id="add">
-        ＋ Add row
+        ＋ Add Row
       </button>
+
+
+      <button
+        class="remove"
+        id="remove">
+        − Remove Row
+      </button>
+
+
+      <button
+        class="saveBtn"
+        id="saveToday">
+        💾 Save
+      </button>
+
+
+      <button
+        class="png"
+        id="savePNG">
+        📷 PNG
+      </button>
+
 
       <button
         class="clear"
         id="clear">
-        Clear all
+        Clear
       </button>
 
     </div>
+
 
   </div>
 
@@ -581,20 +928,47 @@ const rowsEl =
 const dedEl =
   document.querySelector('#deductions');
 
-const KEY =
-  'kgAmountPWA';
+const clientBar =
+  document.querySelector('#clientBar');
+
+const saveState =
+  document.querySelector('#saveState');
 
 
 /* =========================
-   BLANK DATA
+   STORAGE KEYS
 ========================= */
 
-const blank = () => ({
-  name:'',
-  qty:'',
-  kgBag:'',
-  price:''
-});
+const CLIENT_KEY =
+  'TPOST_CLIENTS_V4';
+
+const SNAPSHOT_KEY =
+  'TPOST_SNAPSHOTS_V1';
+
+
+/* =========================
+   CLIENTS
+========================= */
+
+let clients = {};
+
+let currentClient = null;
+
+
+/* =========================
+   BLANK ROW
+========================= */
+
+function blank(){
+
+  return {
+    name:'',
+    qty:'',
+    kgBag:'',
+    price:''
+  };
+
+}
 
 
 /* =========================
@@ -609,15 +983,18 @@ function num(v){
 
 
 /* =========================
-   FORMAT NUMBER
+   FORMAT
 ========================= */
 
 function fmt(v){
 
-  return Number.isInteger(v)
-    ? String(v)
-    : v.toFixed(2)
-      .replace(/\.?0+$/,'');
+  if(Number.isInteger(v)){
+    return String(v);
+  }
+
+  return v
+    .toFixed(2)
+    .replace(/\.?0+$/,'');
 
 }
 
@@ -626,27 +1003,32 @@ function fmt(v){
    CREATE INPUT
 ========================= */
 
-function input(
+function makeInput(
   cls,
-  val,
-  type='text',
-  ph=''
+  value,
+  type='text'
 ){
 
   const e =
     document.createElement('input');
 
-  e.className = cls;
+  e.className =
+    cls;
 
-  e.value = val || '';
+  e.value =
+    value || '';
 
-  e.type = type;
-
-  e.placeholder = ph;
+  e.type =
+    type;
 
   if(type === 'number'){
-    e.step = 'any';
-    e.inputMode = 'decimal';
+
+    e.step =
+      'any';
+
+    e.inputMode =
+      'decimal';
+
   }
 
   return e;
@@ -655,10 +1037,10 @@ function input(
 
 
 /* =========================
-   ADD ROW
+   ADD MAIN ROW
 ========================= */
 
-function addRow(d=blank()){
+function addRow(data=blank()){
 
   const tr =
     document.createElement('tr');
@@ -667,15 +1049,18 @@ function addRow(d=blank()){
   /* NAME */
 
   const name =
-    input('',d.name);
+    makeInput(
+      '',
+      data.name
+    );
 
 
   /* QTY */
 
   const qty =
-    input(
+    makeInput(
       'num',
-      d.qty,
+      data.qty,
       'number'
     );
 
@@ -683,9 +1068,9 @@ function addRow(d=blank()){
   /* KG/BAG */
 
   const kg =
-    input(
+    makeInput(
       'num',
-      d.kgBag,
+      data.kgBag,
       'number'
     );
 
@@ -693,9 +1078,9 @@ function addRow(d=blank()){
   /* PRICE */
 
   const price =
-    input(
+    makeInput(
       'num',
-      d.price,
+      data.price,
       'number'
     );
 
@@ -709,7 +1094,7 @@ function addRow(d=blank()){
     'calc kilo';
 
 
-  /* TOTAL AMOUNT */
+  /* TOTAL */
 
   const total =
     document.createElement('td');
@@ -717,8 +1102,6 @@ function addRow(d=blank()){
   total.className =
     'calc total';
 
-
-  /* CREATE CELLS */
 
   const cells = [
     name,
@@ -733,8 +1116,6 @@ function addRow(d=blank()){
   cells.forEach((x,i)=>{
 
     let td;
-
-    /* KILO AND TOTAL ARE ALREADY TD */
 
     if(i === 3 || i === 5){
 
@@ -754,18 +1135,21 @@ function addRow(d=blank()){
   });
 
 
-  /* CALCULATE WHEN TYPING */
+  /* AUTO CALCULATE + SAVE */
 
   [
     name,
     qty,
     kg,
     price
-  ].forEach(x=>{
+  ].forEach(inputEl=>{
 
-    x.addEventListener(
+    inputEl.addEventListener(
       'input',
-      calculate
+      ()=>{
+        calculate();
+        autoSave();
+      }
     );
 
   });
@@ -777,10 +1161,10 @@ function addRow(d=blank()){
 
 
 /* =========================
-   ADD DEDUCTION
+   ADD DEDUCTION ROW
 ========================= */
 
-function addDeduction(v=''){
+function addDeduction(value=''){
 
   const tr =
     document.createElement('tr');
@@ -795,9 +1179,9 @@ function addDeduction(v=''){
 
 
   const x =
-    input(
+    makeInput(
       'deduct',
-      v,
+      value,
       'number'
     );
 
@@ -805,16 +1189,468 @@ function addDeduction(v=''){
   b.appendChild(x);
 
   tr.appendChild(a);
+
   tr.appendChild(b);
 
 
   x.addEventListener(
     'input',
-    calculate
+    ()=>{
+      calculate();
+      autoSave();
+    }
   );
 
 
   dedEl.appendChild(tr);
+
+}
+
+
+/* =========================
+   GET CURRENT DATA
+========================= */
+
+function getData(){
+
+  return {
+
+    rows:
+      [...rowsEl.rows]
+        .map(r=>({
+
+          name:
+            r.cells[0]
+             .firstChild.value,
+
+          qty:
+            r.cells[1]
+             .firstChild.value,
+
+          kgBag:
+            r.cells[2]
+             .firstChild.value,
+
+          price:
+            r.cells[4]
+             .firstChild.value
+
+        })),
+
+    ded:
+      [...document
+        .querySelectorAll('.deduct')]
+        .map(x=>x.value)
+
+  };
+
+}
+
+
+/* =========================
+   SAVE CURRENT CLIENT
+========================= */
+
+function autoSave(){
+
+  if(!currentClient){
+    return;
+  }
+
+
+  clients[currentClient] =
+    getData();
+
+
+  localStorage.setItem(
+    CLIENT_KEY,
+    JSON.stringify(clients)
+  );
+
+
+  saveState.textContent =
+    'Saved';
+
+}
+
+
+/* =========================
+   LOAD CLIENTS
+========================= */
+
+function loadClients(){
+
+  try{
+
+    clients =
+      JSON.parse(
+        localStorage.getItem(
+          CLIENT_KEY
+        )
+      ) || {};
+
+  }catch(error){
+
+    clients = {};
+
+  }
+
+
+  const names =
+    Object.keys(clients);
+
+
+  if(names.length === 0){
+
+    currentClient =
+      'Client 1';
+
+
+    clients[currentClient] = {
+
+      rows:[],
+
+      ded:[]
+
+    };
+
+
+    localStorage.setItem(
+      CLIENT_KEY,
+      JSON.stringify(clients)
+    );
+
+  }else{
+
+    currentClient =
+      names[0];
+
+  }
+
+}
+
+
+/* =========================
+   RENDER CLIENT TABS
+========================= */
+
+function renderTabs(){
+
+  clientBar.innerHTML =
+    '';
+
+
+  Object.keys(clients)
+    .forEach(name=>{
+
+      const button =
+        document.createElement('button');
+
+
+      button.className =
+        'clientTab';
+
+
+      if(
+        name === currentClient
+      ){
+
+        button.classList.add(
+          'active'
+        );
+
+      }
+
+
+      button.textContent =
+        name;
+
+
+      button.onclick =
+        ()=>{
+          switchClient(name);
+        };
+
+
+      /*
+         Double-click to delete
+         a client tab.
+      */
+
+      button.ondblclick =
+        ()=>{
+          deleteClient(name);
+        };
+
+
+      clientBar.appendChild(
+        button
+      );
+
+    });
+
+
+  /* NEW CLIENT BUTTON */
+
+  const newButton =
+    document.createElement('button');
+
+
+  newButton.className =
+    'newClient';
+
+
+  newButton.textContent =
+    '＋ New';
+
+
+  newButton.onclick =
+    createClient;
+
+
+  clientBar.appendChild(
+    newButton
+  );
+
+}
+
+
+/* =========================
+   LOAD CLIENT DATA
+========================= */
+
+function loadClient(){
+
+  rowsEl.innerHTML =
+    '';
+
+  dedEl.innerHTML =
+    '';
+
+
+  const data =
+    clients[currentClient] || {
+
+      rows:[],
+
+      ded:[]
+
+    };
+
+
+  /*
+     Load saved rows.
+  */
+
+  (data.rows || [])
+    .forEach(addRow);
+
+
+  /*
+     IMPORTANT:
+     Start with only 10 rows.
+  */
+
+  while(
+    rowsEl.children.length < 10
+  ){
+
+    addRow();
+
+  }
+
+
+  /*
+     Load deductions.
+  */
+
+  (data.ded || [])
+    .forEach(addDeduction);
+
+
+  /*
+     Keep 13 deduction rows.
+  */
+
+  while(
+    dedEl.children.length < 13
+  ){
+
+    addDeduction();
+
+  }
+
+
+  calculate();
+
+}
+
+
+/* =========================
+   SWITCH CLIENT
+========================= */
+
+function switchClient(name){
+
+  autoSave();
+
+
+  currentClient =
+    name;
+
+
+  loadClient();
+
+  renderTabs();
+
+
+  saveState.textContent =
+    'Saved';
+
+}
+
+
+/* =========================
+   CREATE NEW CLIENT
+========================= */
+
+function createClient(){
+
+  const name =
+    prompt(
+      'Enter client name:'
+    );
+
+
+  if(name === null){
+    return;
+  }
+
+
+  const cleanName =
+    name.trim();
+
+
+  if(!cleanName){
+
+    alert(
+      'Please enter a client name.'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    clients[cleanName]
+  ){
+
+    alert(
+      'That client already exists.'
+    );
+
+    return;
+
+  }
+
+
+  /* SAVE OLD CLIENT */
+
+  autoSave();
+
+
+  /* CREATE NEW CLIENT */
+
+  clients[cleanName] = {
+
+    rows:[],
+
+    ded:[]
+
+  };
+
+
+  localStorage.setItem(
+    CLIENT_KEY,
+    JSON.stringify(clients)
+  );
+
+
+  currentClient =
+    cleanName;
+
+
+  loadClient();
+
+  renderTabs();
+
+
+  saveState.textContent =
+    'Saved';
+
+}
+
+
+/* =========================
+   DELETE CLIENT
+========================= */
+
+function deleteClient(name){
+
+  if(
+    !confirm(
+      'Delete "' +
+      name +
+      '" and all its data?'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  delete clients[name];
+
+
+  const names =
+    Object.keys(clients);
+
+
+  if(names.length === 0){
+
+    currentClient =
+      'Client 1';
+
+
+    clients[currentClient] = {
+
+      rows:[],
+
+      ded:[]
+
+    };
+
+  }else if(
+    currentClient === name
+  ){
+
+    currentClient =
+      names[0];
+
+  }
+
+
+  localStorage.setItem(
+    CLIENT_KEY,
+    JSON.stringify(clients)
+  );
+
+
+  loadClient();
+
+  renderTabs();
 
 }
 
@@ -825,69 +1661,84 @@ function addDeduction(v=''){
 
 function calculate(){
 
-  let sk = 0;
-  let sa = 0;
+  let totalKilo = 0;
+
+  let totalAmount = 0;
 
 
-  [...rowsEl.rows].forEach(r=>{
+  [...rowsEl.rows]
+    .forEach(row=>{
 
-    const q =
-      num(
-        r.cells[1]
-         .firstChild.value
-      );
-
-
-    const kg =
-      num(
-        r.cells[2]
-         .firstChild.value
-      );
+      const qty =
+        num(
+          row.cells[1]
+             .firstChild.value
+        );
 
 
-    const p =
-      num(
-        r.cells[4]
-         .firstChild.value
-      );
+      const kgBag =
+        num(
+          row.cells[2]
+             .firstChild.value
+        );
 
 
-    /* KILO = QTY × KG/BAG */
-
-    const k =
-      q * kg;
-
-
-    /* TOTAL = KILO × PRICE */
-
-    const t =
-      k * p;
+      const price =
+        num(
+          row.cells[4]
+             .firstChild.value
+        );
 
 
-    r.querySelector('.kilo')
-      .textContent = fmt(k);
+      /*
+         KILO = QTY × KG/BAG
+      */
+
+      const kilo =
+        qty * kgBag;
 
 
-    r.querySelector('.total')
-      .textContent = fmt(t);
+      /*
+         TOTAL = KILO × PRICE
+      */
+
+      const amount =
+        kilo * price;
 
 
-    sk += k;
-    sa += t;
+      row.querySelector(
+        '.kilo'
+      ).textContent =
+        fmt(kilo);
 
-  });
+
+      row.querySelector(
+        '.total'
+      ).textContent =
+        fmt(amount);
+
+
+      totalKilo +=
+        kilo;
+
+
+      totalAmount +=
+        amount;
+
+    });
 
 
   /* DEDUCTIONS */
 
-  let d = 0;
+  let deductions = 0;
 
 
   document
     .querySelectorAll('.deduct')
-    .forEach(x=>{
+    .forEach(inputEl=>{
 
-      d += num(x.value);
+      deductions +=
+        num(inputEl.value);
 
     });
 
@@ -896,177 +1747,54 @@ function calculate(){
 
   document.querySelector(
     '#sumKilo'
-  ).textContent = fmt(sk);
+  ).textContent =
+    fmt(totalKilo);
 
 
   document.querySelector(
     '#sumAmount'
-  ).textContent = fmt(sa);
+  ).textContent =
+    fmt(totalAmount);
 
-
-  /* FINAL AMOUNT */
 
   document.querySelector(
     '#amountTotal'
-  ).textContent = fmt(sa - d);
-
-
-  save();
-
-  document.querySelector(
-    '#saveState'
-  ).textContent = 'Saved';
+  ).textContent =
+    fmt(
+      totalAmount -
+      deductions
+    );
 
 }
 
 
 /* =========================
-   SAVE
-========================= */
-
-function save(){
-
-  const data = {
-
-    rows:
-      [...rowsEl.rows].map(r=>({
-
-        name:
-          r.cells[0]
-           .firstChild.value,
-
-        qty:
-          r.cells[1]
-           .firstChild.value,
-
-        kgBag:
-          r.cells[2]
-           .firstChild.value,
-
-        price:
-          r.cells[4]
-           .firstChild.value
-
-      })),
-
-    ded:
-      [
-        ...document
-          .querySelectorAll('.deduct')
-      ].map(x=>x.value)
-
-  };
-
-
-  localStorage.setItem(
-    KEY,
-    JSON.stringify(data)
-  );
-
-}
-
-
-/* =========================
-   LOAD
-========================= */
-
-function load(){
-
-  try{
-
-    const saved =
-      JSON.parse(
-        localStorage.getItem(KEY)
-      );
-
-
-    if(saved){
-
-      (saved.rows || [])
-        .forEach(addRow);
-
-
-      (saved.ded || [])
-        .forEach(addDeduction);
-
-
-      /* If saved file has no rows,
-         create 10 */
-
-      if(!saved.rows ||
-         saved.rows.length === 0){
-
-        for(
-          let i=0;
-          i<10;
-          i++
-        ){
-          addRow();
-        }
-
-      }
-
-      return;
-
-    }
-
-  }catch(e){}
-
-
-  /* =====================
-     START WITH 10 ROWS
-  ===================== */
-
-  for(
-    let i=0;
-    i<10;
-    i++
-  ){
-
-    addRow();
-
-  }
-
-
-  /* =====================
-     DEDUCTION ROWS
-  ===================== */
-
-  for(
-    let i=0;
-    i<13;
-    i++
-  ){
-
-    addDeduction();
-
-  }
-
-}
-
-
-/* =========================
-   ADD ROW BUTTON
+   ADD ROW
 ========================= */
 
 document
   .querySelector('#add')
-  .onclick = () => {
+  .onclick = ()=>{
 
     addRow();
 
     calculate();
 
-    /* Scroll to the new row */
+    autoSave();
+
+
+    /*
+       Move to the newly added row.
+    */
 
     setTimeout(()=>{
 
-      const lastRow =
+      const last =
         rowsEl.lastElementChild;
 
-      if(lastRow){
+      if(last){
 
-        lastRow.scrollIntoView({
+        last.scrollIntoView({
           behavior:'smooth',
           block:'center'
         });
@@ -1079,53 +1807,194 @@ document
 
 
 /* =========================
-   CLEAR ALL
+   REMOVE ROW
+========================= */
+
+document
+  .querySelector('#remove')
+  .onclick = ()=>{
+
+    const rows =
+      rowsEl.querySelectorAll('tr');
+
+
+    /*
+       Keep at least 1 row.
+    */
+
+    if(rows.length <= 1){
+
+      alert(
+        'At least one row must remain.'
+      );
+
+      return;
+
+    }
+
+
+    /*
+       Remove the LAST row.
+    */
+
+    rowsEl
+      .lastElementChild
+      .remove();
+
+
+    calculate();
+
+    autoSave();
+
+  };
+
+
+/* =========================
+   SAVE NAMED COPY
+========================= */
+
+document
+  .querySelector('#saveToday')
+  .onclick = ()=>{
+
+    const name =
+      prompt(
+        'Enter a name for this saved calculation:'
+      );
+
+
+    if(name === null){
+      return;
+    }
+
+
+    const cleanName =
+      name.trim();
+
+
+    if(!cleanName){
+
+      alert(
+        'Please enter a name.'
+      );
+
+      return;
+
+    }
+
+
+    let snapshots = {};
+
+
+    try{
+
+      snapshots =
+        JSON.parse(
+          localStorage.getItem(
+            SNAPSHOT_KEY
+          )
+        ) || {};
+
+    }catch(error){
+
+      snapshots = {};
+
+    }
+
+
+    snapshots[cleanName] =
+      getData();
+
+
+    localStorage.setItem(
+      SNAPSHOT_KEY,
+      JSON.stringify(
+        snapshots
+      )
+    );
+
+
+    /*
+       Also save current client.
+    */
+
+    autoSave();
+
+
+    saveState.textContent =
+      'Saved: ' + cleanName;
+
+
+    alert(
+      'Saved as "' +
+      cleanName +
+      '"'
+    );
+
+  };
+
+
+/* =========================
+   CLEAR CURRENT CLIENT
 ========================= */
 
 document
   .querySelector('#clear')
-  .onclick = () => {
+  .onclick = ()=>{
 
     if(
-      confirm(
-        'Clear all entries?'
+      !confirm(
+        'Clear all entries for "' +
+        currentClient +
+        '"?'
       )
     ){
 
-      rowsEl.innerHTML = '';
-
-      dedEl.innerHTML = '';
-
-
-      /* BACK TO 10 ROWS */
-
-      for(
-        let i=0;
-        i<10;
-        i++
-      ){
-
-        addRow();
-
-      }
-
-
-      /* DEDUCTIONS */
-
-      for(
-        let i=0;
-        i<13;
-        i++
-      ){
-
-        addDeduction();
-
-      }
-
-
-      calculate();
+      return;
 
     }
+
+
+    rowsEl.innerHTML =
+      '';
+
+    dedEl.innerHTML =
+      '';
+
+
+    /*
+       Reset to exactly 10 rows.
+    */
+
+    for(
+      let i=0;
+      i<10;
+      i++
+    ){
+
+      addRow();
+
+    }
+
+
+    /*
+       Reset deductions.
+    */
+
+    for(
+      let i=0;
+      i<13;
+      i++
+    ){
+
+      addDeduction();
+
+    }
+
+
+    calculate();
+
+    autoSave();
 
   };
 
@@ -1134,7 +2003,11 @@ document
    START APP
 ========================= */
 
-load();
+loadClients();
+
+renderTabs();
+
+loadClient();
 
 calculate();
 
@@ -1150,9 +2023,11 @@ if(
   window.addEventListener(
     'load',
     ()=>{
-      navigator.serviceWorker.register(
-        'sw.js'
-      );
+
+      navigator.serviceWorker
+        .register('sw.js')
+        .catch(()=>{});
+
     }
   );
 
