@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 
 <meta name="viewport"
-content="width=device-width,
-initial-scale=1,
-maximum-scale=1,
-user-scalable=no,
-viewport-fit=cover">
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               user-scalable=no,
+               viewport-fit=cover">
 
 <meta name="theme-color" content="#08dada">
 
@@ -22,7 +22,12 @@ viewport-fit=cover">
 
 <title>T-Post</title>
 
+
 <style>
+
+/* =========================
+   BASIC
+========================= */
 
 *{
   box-sizing:border-box;
@@ -40,30 +45,37 @@ body{
 body{
   background:#f4f7f8;
   color:#172024;
-  font-family:-apple-system,BlinkMacSystemFont,
-  "Segoe UI",Arial,sans-serif;
+  font-family:-apple-system,
+              BlinkMacSystemFont,
+              "Segoe UI",
+              Arial,
+              sans-serif;
 }
 
 .app{
   width:100%;
   max-width:1000px;
-  margin:auto;
+  margin:0 auto;
   padding:4px;
 }
 
 
-/* TOP */
+/* =========================
+   TOP
+========================= */
 
 .top{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  width:100%;
   margin-bottom:5px;
 }
 
 h1{
   margin:0;
   font-size:20px;
+  line-height:1.2;
 }
 
 .save{
@@ -72,17 +84,24 @@ h1{
 }
 
 
-/* CLIENT TABS */
+/* =========================
+   CLIENT TABS
+========================= */
 
 .clientBar{
   display:flex;
-  gap:4px;
   align-items:flex-end;
+  gap:4px;
+
   width:100%;
+
   overflow-x:auto;
   overflow-y:hidden;
+
   padding:2px 0 5px;
+
   scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
 }
 
 .clientBar::-webkit-scrollbar{
@@ -91,13 +110,18 @@ h1{
 
 .clientTab{
   flex:0 0 auto;
+
   border:0;
   border-radius:9px 9px 0 0;
+
   padding:8px 12px;
+
   background:#dfe8e9;
   color:#172024;
+
   font-size:12px;
   font-weight:700;
+
   white-space:nowrap;
 }
 
@@ -107,91 +131,146 @@ h1{
 
 .newClient{
   flex:0 0 auto;
+
   border:0;
   border-radius:9px;
+
   padding:8px 11px;
+
   background:#172024;
-  color:white;
+  color:#fff;
+
   font-size:12px;
   font-weight:700;
+
+  white-space:nowrap;
 }
 
 
-/* CARD */
+/* =========================
+   CARD
+========================= */
 
 .card{
   width:100%;
-  background:white;
+  max-width:100%;
+
+  background:#fff;
+
   border-radius:0 14px 14px 14px;
+
   box-shadow:0 2px 10px #0001;
+
   overflow:hidden;
 }
 
 
-/* TABLE */
+/* =========================
+   TABLE
+========================= */
 
 .scroll{
   display:block;
+
   width:100%;
   max-width:100%;
+
   overflow:hidden;
 }
 
 .mainTable{
-  display:table;
   width:100% !important;
   max-width:100% !important;
   min-width:0 !important;
+
   border-collapse:collapse;
+
   table-layout:fixed;
 }
 
-<colgroup>
-  <col style="width:25%">
-  <col style="width:12%">
-  <col style="width:9%">
-  <col style="width:15%">
-  <col style="width:12%">
-  <col style="width:27%">
-</colgroup>
+
+/*
+   DEFAULT WIDTHS
+
+   Name          25%
+   Qty           12%
+   kg/bag         9%
+   Kilo          15%
+   Price         12%
+   Total Amount  27%
+
+   TOTAL = 100%
+*/
 
 .mainTable th,
 .mainTable td{
-  position:relative;
+  min-width:0;
+  max-width:100%;
 }
+
+
+/* =========================
+   HEADER
+========================= */
 
 .mainTable th{
+  position:relative;
+
   background:#08dada;
-  padding:8px 3px;
+
+  padding:8px 2px;
+
   text-align:center;
-  font-size:11px;
+
+  font-size:12px;
   line-height:1.05;
+
   white-space:normal;
+
   overflow-wrap:anywhere;
+  word-break:break-word;
+
   overflow:hidden;
 }
+
+
+/* =========================
+   CELLS
+========================= */
 
 .mainTable td{
-  height:43px;
   border:1px solid #d9dfe2;
-  padding:1px 2px;
+
+  height:43px;
+
+  padding:1px;
+
   overflow:hidden;
 }
 
 
-/* INPUT */
+/* =========================
+   INPUTS
+========================= */
 
 .mainTable input{
   display:block;
+
   width:100%;
-  min-width:0;
   max-width:100%;
+  min-width:0;
+
   height:39px;
+
   border:0;
   outline:0;
+
   background:transparent;
+
   padding:3px 2px;
-  font-size:14px;
+
+  font-size:15px;
+
   color:#172024;
 }
 
@@ -200,62 +279,115 @@ h1{
 }
 
 
-/* CALCULATED */
+/* =========================
+   CALCULATED CELLS
+========================= */
 
 .mainTable .calc{
   text-align:center;
+
   padding:3px 1px;
-  font-size:12px;
+
+  font-size:13px;
+
   font-variant-numeric:tabular-nums;
+
   background:#f8fafb;
+
   white-space:nowrap;
+
   overflow:hidden;
 }
 
 
-/* RESIZE HANDLES */
+/* =========================
+   DRAGGABLE DIVIDERS
+========================= */
+
+/*
+   Each divider has a large invisible
+   touch area, making it easier to
+   drag on an iPhone.
+*/
 
 .resizeHandle{
   position:absolute;
+
   top:0;
-  right:-4px;
-  width:9px;
+  right:-9px;
+
+  width:18px;
   height:100%;
-  z-index:20;
+
+  z-index:100;
+
   cursor:col-resize;
+
   touch-action:none;
+}
+
+.resizeHandle::before{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  right:7px;
+
+  width:3px;
+  height:100%;
+
+  background:#17202455;
+
+  border-radius:3px;
 }
 
 .resizeHandle::after{
   content:"";
+
   position:absolute;
-  top:25%;
+
+  top:35%;
   right:3px;
-  width:2px;
-  height:50%;
-  background:#17202455;
+
+  width:11px;
+  height:30%;
+
+  border-left:2px solid #17202488;
+  border-right:2px solid #17202488;
+
   border-radius:2px;
 }
 
-.resizing{
-  cursor:col-resize !important;
-  user-select:none !important;
+body.resizing{
+  user-select:none;
+  -webkit-user-select:none;
+
+  cursor:col-resize;
 }
 
 
-/* SUMMARY */
+/* =========================
+   SUMMARY
+========================= */
 
 .summary{
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:6px;
+
   padding:7px;
 }
 
 .box{
   background:#08dada;
+
   border-radius:8px;
+
   padding:7px 9px;
+
   min-width:0;
 }
 
@@ -265,32 +397,49 @@ h1{
 
 .box strong{
   display:block;
+
   text-align:right;
+
   font-size:17px;
+
   margin-top:3px;
+
   overflow:hidden;
+
+  text-overflow:ellipsis;
 }
 
 
-/* AMOUNT */
+/* =========================
+   DEDUCTIONS
+========================= */
 
 .amount{
   width:100%;
+  max-width:100%;
+
   padding:0 7px 7px;
+
   overflow:hidden;
 }
 
 .amount table{
   width:100%;
+  max-width:100%;
   min-width:0;
+
   border-collapse:collapse;
+
   table-layout:fixed;
 }
 
 .amount th{
   background:#08dada;
+
   padding:8px 4px;
+
   text-align:left;
+
   font-size:12px;
 }
 
@@ -300,17 +449,25 @@ h1{
 
 .amount td{
   height:40px;
+
   border:1px solid #d9dfe2;
+
   padding:2px 4px;
 }
 
 .amount .deduct{
   display:block;
+
   width:100%;
+  max-width:100%;
+
+  text-align:right;
+
   border:0;
   outline:0;
+
   background:transparent;
-  text-align:right;
+
   font-size:15px;
 }
 
@@ -319,26 +476,43 @@ h1{
 }
 
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 
 .actions{
   display:flex;
+
   flex-wrap:nowrap;
+
   gap:4px;
+
   width:100%;
+  max-width:100%;
+
   padding:7px;
+
   overflow:hidden;
 }
 
 .actions button{
   flex:1 1 0;
+
   min-width:0;
+
   border:0;
+
   border-radius:9px;
+
   padding:10px 2px;
-  font-size:10px;
+
+  font-size:11px;
+
   font-weight:700;
+
   white-space:nowrap;
+
+  overflow:hidden;
 }
 
 .add{
@@ -362,9 +536,40 @@ h1{
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
+
+  .app{
+    padding:3px;
+  }
+
+  .top{
+    margin-bottom:4px;
+  }
+
+  h1{
+    font-size:18px;
+  }
+
+  .save{
+    display:none;
+  }
+
+
+  /* CLIENT TABS */
+
+  .clientTab,
+  .newClient{
+    font-size:11px;
+
+    padding:8px 9px;
+  }
+
+
+  /* TABLE */
 
   .scroll{
     width:100%;
@@ -374,32 +579,115 @@ h1{
 
   .mainTable{
     width:100% !important;
-    min-width:0 !important;
     max-width:100% !important;
+    min-width:0 !important;
+
     table-layout:fixed;
   }
 
-  .mainTable th,
-  .mainTable td{
-    min-width:0;
-    max-width:100%;
-  }
+
+  /* HEADER */
 
   .mainTable th{
+    font-size:9px;
+
+    line-height:1.05;
+
+    padding:7px 1px;
+
     white-space:normal;
+
     overflow-wrap:anywhere;
     word-break:break-word;
   }
 
+
+  /* CELLS */
+
+  .mainTable td{
+    height:43px;
+
+    padding:1px;
+  }
+
+
+  /* INPUT */
+
   .mainTable input{
     width:100%;
-    min-width:0;
     max-width:100%;
+    min-width:0;
+
+    height:39px;
+
+    padding:3px 1px;
+
+    font-size:12px;
   }
+
+  .mainTable input.num{
+    text-align:center;
+  }
+
+  .mainTable .calc{
+    font-size:11px;
+
+    padding:3px 1px;
+  }
+
+
+  /* SUMMARY */
+
+  .summary{
+    grid-template-columns:1fr 1fr;
+
+    gap:5px;
+
+    padding:6px;
+  }
+
+  .box{
+    padding:6px 7px;
+  }
+
+  .box span{
+    font-size:10px;
+  }
+
+  .box strong{
+    font-size:15px;
+  }
+
+
+  /* AMOUNT */
+
+  .amount{
+    padding:0 6px 6px;
+  }
+
+
+  /* BUTTONS */
+
+  .actions{
+    gap:3px;
+
+    padding:6px;
+  }
+
+  .actions button{
+    padding:10px 1px;
+
+    font-size:9px;
+
+    border-radius:8px;
+  }
+
 }
 
 
-/* VERY SMALL PHONES */
+/* =========================
+   VERY SMALL IPHONE
+========================= */
 
 @media(max-width:390px){
 
@@ -425,12 +713,14 @@ h1{
 
   .actions button{
     padding:9px 1px;
+
     font-size:8px;
   }
 
 }
 
 </style>
+
 </head>
 
 
@@ -439,255 +729,288 @@ h1{
 <div class="app">
 
 
-<!-- TOP -->
+  <!-- TOP -->
 
-<div class="top">
+  <div class="top">
 
-<h1>T-Post</h1>
+    <h1>T-Post</h1>
 
-<span
-class="save"
-id="saveState">
-Saved
-</span>
+    <span
+      class="save"
+      id="saveState">
+      Saved
+    </span>
 
-</div>
+  </div>
 
 
-<!-- CLIENT TABS -->
+  <!-- CLIENT TABS -->
 
-<div
-class="clientBar"
-id="clientBar">
-</div>
+  <div
+    class="clientBar"
+    id="clientBar">
+  </div>
 
 
-<!-- CARD -->
+  <!-- CARD -->
 
-<div class="card">
+  <div class="card">
 
 
-<!-- MAIN TABLE -->
+    <!-- MAIN TABLE -->
 
-<div class="scroll">
+    <div class="scroll">
 
-<table
-class="mainTable"
-id="mainTable">
+      <table
+        class="mainTable"
+        id="mainTable">
 
-<colgroup>
+        <colgroup>
 
-<col id="col0">
-<col id="col1">
-<col id="col2">
-<col id="col3">
-<col id="col4">
-<col id="col5">
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
+          <col>
 
-</colgroup>
+        </colgroup>
 
 
-<thead>
+        <thead>
 
-<tr>
+          <tr>
 
-<th>
-Name
-<span
-class="resizeHandle"
-data-col="0"></span>
-</th>
+            <th data-col="0">
 
-<th>
-Qty
-<span
-class="resizeHandle"
-data-col="1"></span>
-</th>
+              Name
 
-<th>
-kg/bag
-<span
-class="resizeHandle"
-data-col="2"></span>
-</th>
+              <span
+                class="resizeHandle"
+                data-col="0">
+              </span>
 
-<th>
-Kilo
-<span
-class="resizeHandle"
-data-col="3"></span>
-</th>
+            </th>
 
-<th>
-Price
-<span
-class="resizeHandle"
-data-col="4"></span>
-</th>
 
-<th>
-Total Amount
-</th>
+            <th data-col="1">
 
-</tr>
+              Qty
 
-</thead>
+              <span
+                class="resizeHandle"
+                data-col="1">
+              </span>
 
+            </th>
 
-<tbody id="rows">
-</tbody>
 
-</table>
+            <th data-col="2">
 
-</div>
+              kg/bag
 
+              <span
+                class="resizeHandle"
+                data-col="2">
+              </span>
 
-<!-- SUMMARY -->
+            </th>
 
-<div class="summary">
 
-<div class="box">
+            <th data-col="3">
 
-<span>
-Σ kilo
-</span>
+              Kilo
 
-<strong id="sumKilo">
-0
-</strong>
+              <span
+                class="resizeHandle"
+                data-col="3">
+              </span>
 
-</div>
+            </th>
 
 
-<div class="box">
+            <th data-col="4">
 
-<span>
-Σ Total Amount
-</span>
+              Price
 
-<strong id="sumAmount">
-0
-</strong>
+              <span
+                class="resizeHandle"
+                data-col="4">
+              </span>
 
-</div>
+            </th>
 
-</div>
 
+            <th data-col="5">
 
-<!-- DEDUCTIONS -->
+              Total Amount
 
-<div class="amount">
+            </th>
 
-<table>
+          </tr>
 
-<thead>
+        </thead>
 
-<tr>
 
-<th>
-Amount
-</th>
+        <tbody id="rows">
+        </tbody>
 
-<th>
-Amount
-</th>
+      </table>
 
-</tr>
+    </div>
 
-</thead>
 
+    <!-- SUMMARY -->
 
-<tbody id="deductions">
-</tbody>
+    <div class="summary">
 
+      <div class="box">
 
-<tfoot>
+        <span>
+          Σ kilo
+        </span>
 
-<tr>
+        <strong id="sumKilo">
+          0
+        </strong>
 
-<td class="amountTotal">
-Amount total
-</td>
+      </div>
 
-<td
-class="calc amountTotal"
-id="amountTotal">
-0
-</td>
 
-</tr>
+      <div class="box">
 
-</tfoot>
+        <span>
+          Σ Total Amount
+        </span>
 
-</table>
+        <strong id="sumAmount">
+          0
+        </strong>
 
-</div>
+      </div>
 
+    </div>
 
-<!-- BUTTONS -->
 
-<div class="actions">
+    <!-- DEDUCTIONS -->
 
-<button
-class="add"
-id="add">
-＋ Add
-</button>
+    <div class="amount">
 
-<button
-class="remove"
-id="remove">
-− Remove
-</button>
+      <table>
 
-<button
-class="saveBtn"
-id="saveToday">
-💾 Save
-</button>
+        <thead>
 
-<button
-class="png"
-id="savePNG">
-📷 PNG
-</button>
+          <tr>
 
-<button
-class="clear"
-id="clear">
-Clear
-</button>
+            <th>
+              Amount
+            </th>
 
-</div>
+            <th>
+              Amount
+            </th>
 
+          </tr>
 
-</div>
+        </thead>
+
+
+        <tbody id="deductions">
+        </tbody>
+
+
+        <tfoot>
+
+          <tr>
+
+            <td class="amountTotal">
+              Amount total
+            </td>
+
+            <td
+              class="calc amountTotal"
+              id="amountTotal">
+              0
+            </td>
+
+          </tr>
+
+        </tfoot>
+
+      </table>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="actions">
+
+      <button
+        class="add"
+        id="add">
+        ＋ Add
+      </button>
+
+
+      <button
+        class="remove"
+        id="remove">
+        − Remove
+      </button>
+
+
+      <button
+        class="saveBtn"
+        id="saveToday">
+        💾 Save
+      </button>
+
+
+      <button
+        class="png"
+        id="savePNG">
+        📷 PNG
+      </button>
+
+
+      <button
+        class="clear"
+        id="clear">
+        Clear
+      </button>
+
+    </div>
+
+
+  </div>
 
 </div>
 
 
 <script>
 
-
 /* =========================
    ELEMENTS
 ========================= */
 
 const rowsEl =
-document.querySelector('#rows');
+  document.querySelector('#rows');
 
 const dedEl =
-document.querySelector('#deductions');
+  document.querySelector('#deductions');
 
 const clientBar =
-document.querySelector('#clientBar');
+  document.querySelector('#clientBar');
 
 const saveState =
-document.querySelector('#saveState');
+  document.querySelector('#saveState');
 
 const mainTable =
-document.querySelector('#mainTable');
+  document.querySelector('#mainTable');
+
+const colElements =
+  mainTable.querySelectorAll('col');
 
 
 /* =========================
@@ -695,13 +1018,10 @@ document.querySelector('#mainTable');
 ========================= */
 
 const CLIENT_KEY =
-'TPOST_CLIENTS_V6';
+  'TPOST_CLIENTS_V6';
 
 const WIDTH_KEY =
-'TPOST_COLUMN_WIDTHS_V6';
-
-const SNAPSHOT_KEY =
-'TPOST_SNAPSHOTS_V6';
+  'TPOST_WIDTHS_V1';
 
 
 let clients = {};
@@ -710,17 +1030,138 @@ let currentClient = null;
 
 
 /* =========================
-   DEFAULT WIDTHS
+   DEFAULT COLUMN WIDTHS
 ========================= */
 
 let columnWidths = [
-  25,
-  12,
-  9,
-  15,
-  12,
-  27
+
+  25,  // Name
+  12,  // Qty
+  9,   // kg/bag
+  15,  // Kilo
+  12,  // Price
+  27   // Total Amount
+
 ];
+
+
+/* =========================
+   LOAD COLUMN WIDTHS
+========================= */
+
+function loadWidths(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem(
+          WIDTH_KEY
+        )
+      );
+
+    if(
+      Array.isArray(saved) &&
+      saved.length === 6
+    ){
+
+      const total =
+        saved.reduce(
+          (a,b)=>a+Number(b),
+          0
+        );
+
+      if(
+        Math.abs(total - 100) < 0.5
+      ){
+
+        columnWidths =
+          saved.map(Number);
+
+      }
+
+    }
+
+  }catch(error){}
+
+}
+
+
+/* =========================
+   APPLY COLUMN WIDTHS
+========================= */
+
+function applyWidths(){
+
+  columnWidths.forEach(
+    (width,index)=>{
+
+      colElements[index]
+        .style.width =
+        width + '%';
+
+    }
+  );
+
+}
+
+
+/* =========================
+   SAVE WIDTHS
+========================= */
+
+function saveWidths(){
+
+  localStorage.setItem(
+    WIDTH_KEY,
+    JSON.stringify(
+      columnWidths
+    )
+  );
+
+}
+
+
+/* =========================
+   RESET WIDTHS
+========================= */
+
+function resetWidths(){
+
+  columnWidths = [
+
+    25,
+    12,
+    9,
+    15,
+    12,
+    27
+
+  ];
+
+  applyWidths();
+
+  saveWidths();
+
+}
+
+
+/* =========================
+   BLANK ROW
+========================= */
+
+function blank(){
+
+  return {
+
+    name:'',
+    qty:'',
+    kgBag:'',
+    price:''
+
+  };
+
+}
 
 
 /* =========================
@@ -741,7 +1182,9 @@ function num(v){
 function fmt(v){
 
   if(Number.isInteger(v)){
+
     return String(v);
+
   }
 
   return v
@@ -762,19 +1205,24 @@ function makeInput(
 ){
 
   const e =
-  document.createElement('input');
+    document.createElement('input');
 
-  e.className = cls;
+  e.className =
+    cls;
 
-  e.value = value || '';
+  e.value =
+    value || '';
 
-  e.type = type;
+  e.type =
+    type;
 
   if(type === 'number'){
 
-    e.step = 'any';
+    e.step =
+      'any';
 
-    e.inputMode = 'decimal';
+    e.inputMode =
+      'decimal';
 
   }
 
@@ -787,64 +1235,66 @@ function makeInput(
    ADD ROW
 ========================= */
 
-function addRow(data={}){
+function addRow(data=blank()){
 
   const tr =
-  document.createElement('tr');
+    document.createElement('tr');
 
 
   const name =
-  makeInput(
-    '',
-    data.name || ''
-  );
+    makeInput(
+      '',
+      data.name
+    );
 
 
   const qty =
-  makeInput(
-    'num',
-    data.qty || '',
-    'number'
-  );
+    makeInput(
+      'num',
+      data.qty,
+      'number'
+    );
 
 
   const kg =
-  makeInput(
-    'num',
-    data.kgBag || '',
-    'number'
-  );
+    makeInput(
+      'num',
+      data.kgBag,
+      'number'
+    );
 
 
   const price =
-  makeInput(
-    'num',
-    data.price || '',
-    'number'
-  );
+    makeInput(
+      'num',
+      data.price,
+      'number'
+    );
 
 
   const kilo =
-  document.createElement('td');
+    document.createElement('td');
 
   kilo.className =
-  'calc kilo';
+    'calc kilo';
 
 
   const total =
-  document.createElement('td');
+    document.createElement('td');
 
   total.className =
-  'calc total';
+    'calc total';
 
 
   const cells = [
+
     name,
     qty,
     kg,
     kilo,
     price,
     total
+
   ];
 
 
@@ -852,18 +1302,23 @@ function addRow(data={}){
 
     let td;
 
-    if(i === 3 || i === 5){
+
+    if(
+      i === 3 ||
+      i === 5
+    ){
 
       td = x;
 
     }else{
 
       td =
-      document.createElement('td');
+        document.createElement('td');
 
       td.appendChild(x);
 
     }
+
 
     tr.appendChild(td);
 
@@ -880,8 +1335,11 @@ function addRow(data={}){
     inputEl.addEventListener(
       'input',
       ()=>{
+
         calculate();
+
         autoSave();
+
       }
     );
 
@@ -900,35 +1358,39 @@ function addRow(data={}){
 function addDeduction(value=''){
 
   const tr =
-  document.createElement('tr');
+    document.createElement('tr');
+
 
   const a =
-  document.createElement('td');
+    document.createElement('td');
 
   const b =
-  document.createElement('td');
+    document.createElement('td');
 
 
   const x =
-  makeInput(
-    'deduct',
-    value,
-    'number'
-  );
+    makeInput(
+      'deduct',
+      value,
+      'number'
+    );
 
 
   b.appendChild(x);
 
-  tr.appendChild(a);
 
+  tr.appendChild(a);
   tr.appendChild(b);
 
 
   x.addEventListener(
     'input',
     ()=>{
+
       calculate();
+
       autoSave();
+
     }
   );
 
@@ -947,30 +1409,31 @@ function getData(){
   return {
 
     rows:
-    [...rowsEl.rows].map(r=>({
+      [...rowsEl.rows]
+      .map(r=>({
 
-      name:
-      r.cells[0]
-       .firstChild.value,
+        name:
+          r.cells[0]
+           .firstChild.value,
 
-      qty:
-      r.cells[1]
-       .firstChild.value,
+        qty:
+          r.cells[1]
+           .firstChild.value,
 
-      kgBag:
-      r.cells[2]
-       .firstChild.value,
+        kgBag:
+          r.cells[2]
+           .firstChild.value,
 
-      price:
-      r.cells[4]
-       .firstChild.value
+        price:
+          r.cells[4]
+           .firstChild.value
 
-    })),
+      })),
 
     ded:
-    [...document
-      .querySelectorAll('.deduct')]
-    .map(x=>x.value)
+      [...document
+        .querySelectorAll('.deduct')]
+      .map(x=>x.value)
 
   };
 
@@ -984,12 +1447,14 @@ function getData(){
 function autoSave(){
 
   if(!currentClient){
+
     return;
+
   }
 
 
   clients[currentClient] =
-  getData();
+    getData();
 
 
   localStorage.setItem(
@@ -999,7 +1464,7 @@ function autoSave(){
 
 
   saveState.textContent =
-  'Saved';
+    'Saved';
 
 }
 
@@ -1013,13 +1478,13 @@ function loadClients(){
   try{
 
     clients =
-    JSON.parse(
-      localStorage.getItem(
-        CLIENT_KEY
-      )
-    ) || {};
+      JSON.parse(
+        localStorage.getItem(
+          CLIENT_KEY
+        )
+      ) || {};
 
-  }catch(e){
+  }catch(error){
 
     clients = {};
 
@@ -1027,24 +1492,26 @@ function loadClients(){
 
 
   const names =
-  Object.keys(clients);
+    Object.keys(clients);
 
 
   if(names.length === 0){
 
     currentClient =
-    'Client 1';
+      'Client 1';
 
 
     clients[currentClient] = {
+
       rows:[],
       ded:[]
+
     };
 
   }else{
 
     currentClient =
-    names[0];
+      names[0];
 
   }
 
@@ -1058,67 +1525,74 @@ function loadClients(){
 
 
 /* =========================
-   CLIENT TABS
+   RENDER CLIENT TABS
 ========================= */
 
 function renderTabs(){
 
-  clientBar.innerHTML = '';
+  clientBar.innerHTML =
+    '';
 
 
   Object.keys(clients)
-  .forEach(name=>{
+    .forEach(name=>{
 
-    const button =
-    document.createElement('button');
-
-    button.className =
-    'clientTab';
+      const button =
+        document.createElement('button');
 
 
-    if(name === currentClient){
+      button.className =
+        'clientTab';
 
-      button.classList.add(
-        'active'
+
+      if(
+        name === currentClient
+      ){
+
+        button.classList.add(
+          'active'
+        );
+
+      }
+
+
+      button.textContent =
+        name;
+
+
+      button.onclick =
+        ()=>{
+          switchClient(name);
+        };
+
+
+      button.ondblclick =
+        ()=>{
+          deleteClient(name);
+        };
+
+
+      clientBar.appendChild(
+        button
       );
 
-    }
-
-
-    button.textContent =
-    name;
-
-
-    button.onclick =
-    ()=>{
-      switchClient(name);
-    };
-
-
-    button.ondblclick =
-    ()=>{
-      deleteClient(name);
-    };
-
-
-    clientBar.appendChild(
-      button
-    );
-
-  });
+    });
 
 
   const newButton =
-  document.createElement('button');
+    document.createElement('button');
+
 
   newButton.className =
-  'newClient';
+    'newClient';
+
 
   newButton.textContent =
-  '＋ New';
+    '＋ New';
+
 
   newButton.onclick =
-  createClient;
+    createClient;
 
 
   clientBar.appendChild(
@@ -1134,25 +1608,29 @@ function renderTabs(){
 
 function loadClient(){
 
-  rowsEl.innerHTML = '';
+  rowsEl.innerHTML =
+    '';
 
-  dedEl.innerHTML = '';
+  dedEl.innerHTML =
+    '';
 
 
   const data =
-  clients[currentClient] || {
-    rows:[],
-    ded:[]
-  };
+    clients[currentClient] || {
+
+      rows:[],
+      ded:[]
+
+    };
 
 
   (data.rows || [])
-  .forEach(addRow);
+    .forEach(addRow);
 
 
   /*
-    Start with exactly 10 rows.
-    Add button creates more.
+     START WITH 10 ROWS.
+     MORE CAN BE ADDED.
   */
 
   while(
@@ -1165,7 +1643,7 @@ function loadClient(){
 
 
   (data.ded || [])
-  .forEach(addDeduction);
+    .forEach(addDeduction);
 
 
   while(
@@ -1190,7 +1668,8 @@ function switchClient(name){
 
   autoSave();
 
-  currentClient = name;
+  currentClient =
+    name;
 
   loadClient();
 
@@ -1206,18 +1685,20 @@ function switchClient(name){
 function createClient(){
 
   const name =
-  prompt(
-    'Enter client name:'
-  );
+    prompt(
+      'Enter client name:'
+    );
 
 
   if(name === null){
+
     return;
+
   }
 
 
   const cleanName =
-  name.trim();
+    name.trim();
 
 
   if(!cleanName){
@@ -1246,8 +1727,10 @@ function createClient(){
 
 
   clients[cleanName] = {
+
     rows:[],
     ded:[]
+
   };
 
 
@@ -1258,12 +1741,16 @@ function createClient(){
 
 
   currentClient =
-  cleanName;
+    cleanName;
 
 
   loadClient();
 
   renderTabs();
+
+
+  saveState.textContent =
+    'Saved';
 
 }
 
@@ -1274,31 +1761,37 @@ function createClient(){
 
 function deleteClient(name){
 
-  if(!confirm(
-    'Delete "' +
-    name +
-    '" and all its data?'
-  )){
+  if(
+    !confirm(
+      'Delete "' +
+      name +
+      '" and all its data?'
+    )
+  ){
+
     return;
+
   }
 
 
   delete clients[name];
 
 
-  const names =
-  Object.keys(clients);
+  let names =
+    Object.keys(clients);
 
 
   if(names.length === 0){
 
     currentClient =
-    'Client 1';
+      'Client 1';
 
 
     clients[currentClient] = {
+
       rows:[],
       ded:[]
+
     };
 
   }else if(
@@ -1306,7 +1799,7 @@ function deleteClient(name){
   ){
 
     currentClient =
-    names[0];
+      names[0];
 
   }
 
@@ -1336,86 +1829,91 @@ function calculate(){
 
 
   [...rowsEl.rows]
-  .forEach(row=>{
+    .forEach(row=>{
 
-    const qty =
-    num(
-      row.cells[1]
-         .firstChild.value
-    );
-
-
-    const kgBag =
-    num(
-      row.cells[2]
-         .firstChild.value
-    );
+      const qty =
+        num(
+          row.cells[1]
+             .firstChild.value
+        );
 
 
-    const price =
-    num(
-      row.cells[4]
-         .firstChild.value
-    );
+      const kgBag =
+        num(
+          row.cells[2]
+             .firstChild.value
+        );
 
 
-    const kilo =
-    qty * kgBag;
+      const price =
+        num(
+          row.cells[4]
+             .firstChild.value
+        );
 
 
-    const amount =
-    kilo * price;
+      const kilo =
+        qty * kgBag;
 
 
-    row.querySelector(
-      '.kilo'
-    ).textContent =
-    fmt(kilo);
+      const amount =
+        kilo * price;
 
 
-    row.querySelector(
-      '.total'
-    ).textContent =
-    fmt(amount);
+      row.querySelector(
+        '.kilo'
+      ).textContent =
+        fmt(kilo);
 
 
-    totalKilo += kilo;
+      row.querySelector(
+        '.total'
+      ).textContent =
+        fmt(amount);
 
-    totalAmount += amount;
 
-  });
+      totalKilo +=
+        kilo;
+
+
+      totalAmount +=
+        amount;
+
+    });
 
 
   let deductions = 0;
 
 
   document
-  .querySelectorAll('.deduct')
-  .forEach(x=>{
+    .querySelectorAll('.deduct')
+    .forEach(inputEl=>{
 
-    deductions += num(x.value);
+      deductions +=
+        num(inputEl.value);
 
-  });
+    });
 
 
   document.querySelector(
     '#sumKilo'
   ).textContent =
-  fmt(totalKilo);
+    fmt(totalKilo);
 
 
   document.querySelector(
     '#sumAmount'
   ).textContent =
-  fmt(totalAmount);
+    fmt(totalAmount);
 
 
   document.querySelector(
     '#amountTotal'
   ).textContent =
-  fmt(
-    totalAmount - deductions
-  );
+    fmt(
+      totalAmount -
+      deductions
+    );
 
 }
 
@@ -1424,270 +1922,216 @@ function calculate(){
    ADD ROW
 ========================= */
 
-document.querySelector(
-  '#add'
-).onclick = ()=>{
+document
+  .querySelector('#add')
+  .onclick = ()=>{
 
-  addRow();
+    addRow();
 
-  calculate();
+    calculate();
 
-  autoSave();
+    autoSave();
 
-};
+  };
 
 
 /* =========================
    REMOVE ROW
 ========================= */
 
-document.querySelector(
-  '#remove'
-).onclick = ()=>{
+document
+  .querySelector('#remove')
+  .onclick = ()=>{
 
-  if(rowsEl.children.length <= 1){
-
-    alert(
-      'At least one row must remain.'
-    );
-
-    return;
-
-  }
+    const rows =
+      rowsEl.querySelectorAll('tr');
 
 
-  rowsEl.lastElementChild.remove();
+    if(rows.length <= 1){
 
-  calculate();
+      alert(
+        'At least one row must remain.'
+      );
 
-  autoSave();
+      return;
 
-};
+    }
+
+
+    rowsEl
+      .lastElementChild
+      .remove();
+
+
+    calculate();
+
+    autoSave();
+
+  };
 
 
 /* =========================
-   SAVE
+   SAVE BUTTON
 ========================= */
 
-document.querySelector(
-  '#saveToday'
-).onclick = ()=>{
+document
+  .querySelector('#saveToday')
+  .onclick = ()=>{
 
-  const name =
-  prompt(
-    'Enter a name for this saved calculation:'
-  );
-
-
-  if(name === null){
-    return;
-  }
+    const name =
+      prompt(
+        'Enter a name for this saved calculation:'
+      );
 
 
-  const cleanName =
-  name.trim();
+    if(name === null){
+
+      return;
+
+    }
 
 
-  if(!cleanName){
-
-    alert(
-      'Please enter a name.'
-    );
-
-    return;
-
-  }
+    const cleanName =
+      name.trim();
 
 
-  let snapshots = {};
+    if(!cleanName){
+
+      alert(
+        'Please enter a name.'
+      );
+
+      return;
+
+    }
 
 
-  try{
+    /*
+       Save this calculation
+       to the current phone.
+    */
 
-    snapshots =
-    JSON.parse(
-      localStorage.getItem(
-        SNAPSHOT_KEY
+    let snapshots = {};
+
+
+    try{
+
+      snapshots =
+        JSON.parse(
+          localStorage.getItem(
+            'TPOST_SNAPSHOTS_V1'
+          )
+        ) || {};
+
+    }catch(error){
+
+      snapshots = {};
+
+    }
+
+
+    snapshots[cleanName] =
+      getData();
+
+
+    localStorage.setItem(
+      'TPOST_SNAPSHOTS_V1',
+      JSON.stringify(
+        snapshots
       )
-    ) || {};
-
-  }catch(e){
-
-    snapshots = {};
-
-  }
+    );
 
 
-  snapshots[cleanName] =
-  getData();
+    autoSave();
 
 
-  localStorage.setItem(
-    SNAPSHOT_KEY,
-    JSON.stringify(
-      snapshots
-    )
-  );
+    saveState.textContent =
+      'Saved: ' + cleanName;
 
 
-  autoSave();
+    alert(
+      'Saved as "' +
+      cleanName +
+      '"'
+    );
 
-
-  saveState.textContent =
-  'Saved: ' + cleanName;
-
-
-  alert(
-    'Saved as "' +
-    cleanName +
-    '"'
-  );
-
-};
+  };
 
 
 /* =========================
-   PNG
+   PNG BUTTON
 ========================= */
 
-document.querySelector(
-  '#savePNG'
-).onclick = ()=>{
+document
+  .querySelector('#savePNG')
+  .onclick = ()=>{
 
-  alert(
-    'PNG saving will be added separately.'
-  );
+    alert(
+      'PNG saving can be added separately.'
+    );
 
-};
+  };
 
 
 /* =========================
    CLEAR
 ========================= */
 
-document.querySelector(
-  '#clear'
-).onclick = ()=>{
-
-  if(!confirm(
-    'Clear all entries for "' +
-    currentClient +
-    '"?'
-  )){
-    return;
-  }
-
-
-  rowsEl.innerHTML = '';
-
-  dedEl.innerHTML = '';
-
-
-  for(let i=0;i<10;i++){
-    addRow();
-  }
-
-
-  for(let i=0;i<13;i++){
-    addDeduction();
-  }
-
-
-  calculate();
-
-  autoSave();
-
-};
-
-
-/* =========================
-   COLUMN RESIZING
-========================= */
-
-function applyWidths(){
-
-  const total =
-  columnWidths.reduce(
-    (a,b)=>a+b,
-    0
-  );
-
-
-  columnWidths =
-  columnWidths.map(
-    w=>(w/total)*100
-  );
-
-
-  columnWidths.forEach(
-    (width,index)=>{
-
-      const col =
-      document.querySelector(
-        '#col' + index
-      );
-
-      if(col){
-
-        col.style.width =
-        width + '%';
-
-      }
-
-    }
-  );
-
-}
-
-
-/* =========================
-   SAVE WIDTHS
-========================= */
-
-function saveWidths(){
-
-  localStorage.setItem(
-    WIDTH_KEY,
-    JSON.stringify(
-      columnWidths
-    )
-  );
-
-}
-
-
-/* =========================
-   LOAD WIDTHS
-========================= */
-
-function loadWidths(){
-
-  try{
-
-    const saved =
-    JSON.parse(
-      localStorage.getItem(
-        WIDTH_KEY
-      )
-    );
-
+document
+  .querySelector('#clear')
+  .onclick = ()=>{
 
     if(
-      Array.isArray(saved) &&
-      saved.length === 6
+      !confirm(
+        'Clear all entries for "' +
+        currentClient +
+        '"?'
+      )
     ){
 
-      columnWidths = saved;
+      return;
 
     }
 
-  }catch(e){}
 
-}
+    rowsEl.innerHTML =
+      '';
+
+    dedEl.innerHTML =
+      '';
+
+
+    for(
+      let i=0;
+      i<10;
+      i++
+    ){
+
+      addRow();
+
+    }
+
+
+    for(
+      let i=0;
+      i<13;
+      i++
+    ){
+
+      addDeduction();
+
+    }
+
+
+    calculate();
+
+    autoSave();
+
+  };
 
 
 /* =========================
-   RESIZE LOGIC
+   DRAGGABLE COLUMNS
 ========================= */
 
 let resizing = false;
@@ -1699,31 +2143,57 @@ let startX = 0;
 let startWidths = [];
 
 
-function startResize(
-  event
-){
+/*
+   Minimum column widths.
+*/
 
-  event.preventDefault();
+const minWidths = [
 
-  event.stopPropagation();
+  15, // Name
+  8,  // Qty
+  7,  // kg/bag
+  10, // Kilo
+  8,  // Price
+  15  // Total
+
+];
+
+
+/* =========================
+   START DRAG
+========================= */
+
+function startResize(e){
+
+  e.preventDefault();
+
+  e.stopPropagation();
 
 
   resizing = true;
 
+
   resizeColumn =
-  Number(
-    event.currentTarget.dataset.col
-  );
+    Number(
+      e.currentTarget.dataset.col
+    );
 
 
-  startX =
-  event.touches
-  ? event.touches[0].clientX
-  : event.clientX;
+  if(e.touches){
+
+    startX =
+      e.touches[0].clientX;
+
+  }else{
+
+    startX =
+      e.clientX;
+
+  }
 
 
   startWidths =
-  [...columnWidths];
+    [...columnWidths];
 
 
   document.body.classList.add(
@@ -1733,105 +2203,115 @@ function startResize(
 }
 
 
-function moveResize(
-  event
-){
+/* =========================
+   MOVE DIVIDER
+========================= */
+
+function moveResize(e){
 
   if(!resizing){
+
     return;
+
   }
 
 
-  event.preventDefault();
+  e.preventDefault();
 
 
-  const x =
-  event.touches
-  ? event.touches[0].clientX
-  : event.clientX;
+  let currentX;
+
+
+  if(e.touches){
+
+    currentX =
+      e.touches[0].clientX;
+
+  }else{
+
+    currentX =
+      e.clientX;
+
+  }
 
 
   const tableWidth =
-  mainTable.getBoundingClientRect()
-           .width;
+    mainTable.getBoundingClientRect()
+      .width;
 
 
-  const delta =
-  ((x - startX) /
-   tableWidth) * 100;
+  const change =
+    ((currentX - startX) /
+      tableWidth) * 100;
 
 
-  let left =
-  resizeColumn;
+  const left =
+    resizeColumn;
 
 
-  let right =
-  resizeColumn + 1;
+  const right =
+    resizeColumn + 1;
 
 
   if(right >= 6){
+
     return;
+
   }
+
+
+  let leftWidth =
+    startWidths[left] +
+    change;
+
+
+  let rightWidth =
+    startWidths[right] -
+    change;
 
 
   /*
      Minimum widths.
   */
 
-  const minWidths = [
-    15,  // Name
-    8,   // Qty
-    7,   // kg/bag
-    10,  // Kilo
-    8,   // Price
-    15   // Total
-  ];
-
-
-  let newLeft =
-  startWidths[left] + delta;
-
-
-  let newRight =
-  startWidths[right] - delta;
-
-
   if(
-    newLeft < minWidths[left]
+    leftWidth <
+    minWidths[left]
   ){
 
-    newLeft =
-    minWidths[left];
+    leftWidth =
+      minWidths[left];
 
-    newRight =
-    startWidths[left] +
-    startWidths[right] -
-    newLeft;
+    rightWidth =
+      startWidths[left] +
+      startWidths[right] -
+      leftWidth;
 
   }
 
 
   if(
-    newRight < minWidths[right]
+    rightWidth <
+    minWidths[right]
   ){
 
-    newRight =
-    minWidths[right];
+    rightWidth =
+      minWidths[right];
 
-    newLeft =
-    startWidths[left] +
-    startWidths[right] -
-    newRight;
+    leftWidth =
+      startWidths[left] +
+      startWidths[right] -
+      rightWidth;
 
   }
 
 
   columnWidths[left] =
-  newLeft;
+    leftWidth;
 
 
   columnWidths[right] =
-  newRight;
+    rightWidth;
 
 
   applyWidths();
@@ -1839,10 +2319,16 @@ function moveResize(
 }
 
 
+/* =========================
+   END DRAG
+========================= */
+
 function stopResize(){
 
   if(!resizing){
+
     return;
+
   }
 
 
@@ -1864,22 +2350,22 @@ function stopResize(){
 ========================= */
 
 document
-.querySelectorAll('.resizeHandle')
-.forEach(handle=>{
+  .querySelectorAll('.resizeHandle')
+  .forEach(handle=>{
 
-  handle.addEventListener(
-    'touchstart',
-    startResize,
-    {passive:false}
-  );
+    handle.addEventListener(
+      'touchstart',
+      startResize,
+      {passive:false}
+    );
 
 
-  handle.addEventListener(
-    'mousedown',
-    startResize
-  );
+    handle.addEventListener(
+      'mousedown',
+      startResize
+    );
 
-});
+  });
 
 
 document.addEventListener(
@@ -1935,9 +2421,11 @@ if(
   window.addEventListener(
     'load',
     ()=>{
+
       navigator.serviceWorker
-      .register('sw.js')
-      .catch(()=>{});
+        .register('sw.js')
+        .catch(()=>{});
+
     }
   );
 
